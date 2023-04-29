@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:xs_life/src/constants/page_constants.dart';
 
 class AuthenticationFab extends StatelessWidget {
   const AuthenticationFab({
@@ -18,9 +19,9 @@ class AuthenticationFab extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.all(10),
         child: FloatingActionButton(
-          heroTag: "auth",
+          heroTag: PageConstants.signIn,
           onPressed: () {
-            !loggedIn ? context.push('/sign-in') : signOut();
+            !loggedIn ? context.push('/${PageConstants.signIn}') : signOut();
           },
           backgroundColor: Colors.orange,
           child: const Icon(Icons.key),

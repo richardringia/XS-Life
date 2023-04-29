@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:xs_life/src/constants/page_constants.dart';
 
 class ProfileFab extends StatelessWidget {
   const ProfileFab({
@@ -16,9 +17,9 @@ class ProfileFab extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.all(10),
         child: FloatingActionButton(
-          heroTag: "profile",
+          heroTag: PageConstants.profile,
           onPressed: () {
-            context.push('/profile');
+            context.push('/${PageConstants.profile}');
           },
           backgroundColor: Colors.orange,
           child: const Icon(Icons.person),

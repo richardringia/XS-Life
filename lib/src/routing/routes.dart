@@ -1,7 +1,9 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:xs_life/src/constants/page_constants.dart';
 import 'package:xs_life/src/features/example_map_screen/presentation/example_map_widget.dart';
+import 'package:xs_life/src/features/forum/presentation/forum_screen_widget.dart';
 import 'package:xs_life/src/features/main_screen/presentation/main_screen_widget.dart';
 
 class Routes {
@@ -11,7 +13,7 @@ class Routes {
       builder: (context, state) => const MainScreenWidget(),
       routes: [
         GoRoute(
-          path: 'sign-in',
+          path: PageConstants.signIn,
           builder: (context, state) {
             return SignInScreen(
               actions: [
@@ -62,7 +64,7 @@ class Routes {
           ],
         ),
         GoRoute(
-          path: 'profile',
+          path: PageConstants.profile,
           builder: (context, state) {
             return ProfileScreen(
               providers: const [],
@@ -75,11 +77,17 @@ class Routes {
           },
         ),
         GoRoute(
-          path: 'map',
+          path: PageConstants.map,
           builder: (context, state) {
             return const ExampleMapWidget();
-          }
-        )
+          },
+        ),
+        GoRoute(
+          path: PageConstants.forum,
+          builder: (context, state) {
+            return const ForumScreenWidget();
+          },
+        ),
       ],
     )
   ]);
