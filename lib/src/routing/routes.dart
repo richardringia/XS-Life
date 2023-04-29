@@ -1,6 +1,7 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:xs_life/src/features/example_map_screen/presentation/example_map_widget.dart';
 import 'package:xs_life/src/features/main_screen/presentation/main_screen_widget.dart';
 
 class Routes {
@@ -73,6 +74,12 @@ class Routes {
             );
           },
         ),
+        GoRoute(
+          path: 'map',
+          builder: (context, state) {
+            return const ExampleMapWidget();
+          }
+        )
       ],
     )
   ]);

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:xs_life/src/features/app/presentation/app_state.dart';
 import 'package:xs_life/src/features/authentication/presentation/authentication_fab.dart';
@@ -36,7 +37,7 @@ class MainScreenWidget extends StatelessWidget {
                     margin: const EdgeInsets.all(10),
                     child: FloatingActionButton(
                       onPressed: () {
-                        //action code for button 2
+                        context.push('/map');
                       },
                       backgroundColor: Colors.orange,
                       child: const Icon(Icons.map),
