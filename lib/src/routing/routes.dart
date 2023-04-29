@@ -88,7 +88,11 @@ class Routes {
         GoRoute(
           path: PageConstants.forum,
           builder: (context, state) {
-            return const ForumScreenWidget();
+            return Consumer<AppState>(
+              builder: (context, appState, _) => ForumScreenWidget(
+                questions: appState.forumQuestions,
+              ),
+            );
           },
           routes: [
             GoRoute(
