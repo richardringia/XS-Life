@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:global_configuration/global_configuration.dart';
 
 class MainScreenWidget extends StatelessWidget {
   const MainScreenWidget({super.key});
@@ -12,9 +13,7 @@ class MainScreenWidget extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          children: const [
-            Text("XS Life")
-          ],
+          children: [Text(GlobalConfiguration().get('lat').toString())],
         ),
       ),
     );

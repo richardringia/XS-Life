@@ -3,7 +3,9 @@ import 'package:xs_life/src/features/example_map_screen/application/example_map_
 import 'package:xs_life/src/features/main_screen/application/main_screen_widget.dart';
 import 'package:global_configuration/global_configuration.dart';
 
-void main() {
+Future<void> main()  async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await GlobalConfiguration().loadFromAsset("app_settings");
   runApp(const MyApp());
 }
 

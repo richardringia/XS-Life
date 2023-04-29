@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:xs_life/src/constants/app_constants.dart';
 
 class ExampleMapWidget extends StatelessWidget {
   const ExampleMapWidget({super.key});
@@ -16,7 +16,7 @@ class ExampleMapWidget extends StatelessWidget {
           Flexible(
             child: FlutterMap(
               options: MapOptions(
-                center: LatLng(50, 20),
+                center: AppConstants.kmuttLocation,
                 zoom: 5,
                 interactiveFlags: InteractiveFlag.all - InteractiveFlag.rotate,
               ),
