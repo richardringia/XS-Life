@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
+import 'package:xs_life/src/features/app/presentation/fab_navigation_widget.dart';
 
 class ForumScreenWidget extends StatelessWidget {
   const ForumScreenWidget({super.key});
@@ -18,6 +19,7 @@ class ForumScreenWidget extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: const FabNavigationWidget(),
     );
   }
 }

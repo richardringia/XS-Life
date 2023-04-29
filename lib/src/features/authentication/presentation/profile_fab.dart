@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:xs_life/src/common_widgets/navigation_fab.dart';
 import 'package:xs_life/src/constants/page_constants.dart';
 
 class ProfileFab extends StatelessWidget {
@@ -14,16 +15,12 @@ class ProfileFab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Visibility(
       visible: loggedIn,
-      child: Container(
-        margin: const EdgeInsets.all(10),
-        child: FloatingActionButton(
-          heroTag: PageConstants.profile,
-          onPressed: () {
-            context.push('/${PageConstants.profile}');
-          },
-          backgroundColor: Colors.orange,
-          child: const Icon(Icons.person),
-        ),
+      child: NavigationFab(
+        location: PageConstants.profile,
+        icon: const Icon(Icons.person),
+        onPressed: () {
+          context.push('/${PageConstants.profile}');
+        },
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:xs_life/src/constants/app_constants.dart';
+import 'package:xs_life/src/features/app/presentation/fab_navigation_widget.dart';
 
 class ExampleMapWidget extends StatelessWidget {
   const ExampleMapWidget({super.key});
@@ -30,6 +31,7 @@ class ExampleMapWidget extends StatelessWidget {
           )
         ],
       ),
+      floatingActionButton: const FabNavigationWidget(),
     );
   }
 }
