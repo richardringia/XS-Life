@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart'
     hide EmailAuthProvider, PhoneAuthProvider;
 import 'package:firebase_core/firebase_core.dart';
@@ -11,6 +12,7 @@ class AppState extends ChangeNotifier {
   }
 
   bool _loggedIn = false;
+
   bool get loggedIn => _loggedIn;
 
   Future<void> init() async {
@@ -28,6 +30,21 @@ class AppState extends ChangeNotifier {
         _loggedIn = false;
       }
       notifyListeners();
+    });
+  }
+
+  Future<DocumentReference> addQuestionToForum(
+      String category, String topic, String question) {
+    if (!_loggedIn) {
+      throw Exception('Must be logged in');
+    }
+
+    return FirebaseFirestore.instance.collection('forum').add(<String, dynamic>{
+      'category': category,
+      'topic': topic,
+      'question': question,
+      'user_key': FirebaseAuth.instance.currentUser!.uid,
+      'created_at': DateTime.now().millisecondsSinceEpoch,
     });
   }
 }

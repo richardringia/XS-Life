@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:global_configuration/global_configuration.dart';
+import 'package:go_router/go_router.dart';
+import 'package:xs_life/src/constants/page_constants.dart';
 import 'package:xs_life/src/features/app/presentation/fab_navigation_widget.dart';
 
 class ForumScreenWidget extends StatelessWidget {
@@ -15,7 +16,12 @@ class ForumScreenWidget extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Text(GlobalConfiguration().get('lat').toString()),
+            OutlinedButton(
+              onPressed: () {
+                context.push('/${PageConstants.forum}/add');
+              },
+              child: const Text('Add post'),
+            )
           ],
         ),
       ),
