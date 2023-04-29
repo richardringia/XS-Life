@@ -32,3 +32,6 @@ The main folders within lib/src are:
 - utils
   - in this folder the extra custom functions/ utils can be placed
 
+## Init project
+- Configure app_settings
+- Run flutterfire configure

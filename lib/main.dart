@@ -1,28 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:xs_life/src/features/example_map_screen/application/example_map_widget.dart';
-import 'package:xs_life/src/features/main_screen/application/main_screen_widget.dart';
 import 'package:global_configuration/global_configuration.dart';
+import 'package:xs_life/src/features/app/presentation/app.dart';
+import 'package:xs_life/src/features/app/presentation/app_state.dart';
+import 'package:provider/provider.dart';
 
-Future<void> main()  async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GlobalConfiguration().loadFromAsset("app_settings");
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => AppState(),
+    builder: ((context, child) => const App()),
+  ));
 }
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'XS Life',
-      initialRoute: '/map',
-      routes: {
-        '/': (context) => const MainScreenWidget(),
-        '/map': (context) => const ExampleMapWidget(),
-      },
-    );
-  }
-}
-
