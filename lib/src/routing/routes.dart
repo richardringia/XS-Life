@@ -13,7 +13,7 @@ class Routes {
   static final router = GoRouter(routes: [
     GoRoute(
       path: "/",
-      builder: (context, state) => const MainScreenWidget(),
+      builder: (context, state) => const ExampleMapWidget(),
       routes: [
         GoRoute(
           path: PageConstants.signIn,
@@ -77,12 +77,6 @@ class Routes {
                 }),
               ],
             );
-          },
-        ),
-        GoRoute(
-          path: PageConstants.map,
-          builder: (context, state) {
-            return const ExampleMapWidget();
           },
         ),
         GoRoute(

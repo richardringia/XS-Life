@@ -17,7 +17,7 @@ class FabNavigationWidget extends StatelessWidget {
       builder: (context, appState, _) => Wrap(
         direction: Axis.vertical,
         children: [
-          const NavigationFab(location: '/', icon: Icon(Icons.home)),
+          const NavigationFab(location: '/', icon: Icon(Icons.map)),
           AuthenticationFab(
               loggedIn: appState.loggedIn,
               signOut: () {
@@ -25,8 +25,6 @@ class FabNavigationWidget extends StatelessWidget {
               }),
           ProfileFab(loggedIn: appState.loggedIn),
           const ForumFab(),
-          const NavigationFab(
-              location: PageConstants.map, icon: Icon(Icons.map))
         ],
       ),
     );

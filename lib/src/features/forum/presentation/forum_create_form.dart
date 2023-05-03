@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:xs_life/src/features/forum/data/forum_category.dart';
 
 class ForumCreateForm extends StatefulWidget {
   const ForumCreateForm({
@@ -34,16 +35,17 @@ class ForumCreateFormState extends State<ForumCreateForm> {
           key: _formKey,
           child: Column(
             children: [
-              TextFormField(
-                controller: _category,
-                decoration: const InputDecoration(
-                  hintText: 'Category',
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Enter your category to continue';
-                  }
-                  return null;
+              DropdownButtonFormField(
+                items: ForumCategory.values
+                    .map(
+                      (e) => DropdownMenuItem(
+                        value: e.name,
+                        child: Text(ForumCategoryHelper.getViewName(e)),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (value) {
+                  print(value);
                 },
               ),
               TextFormField(

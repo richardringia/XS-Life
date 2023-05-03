@@ -24,10 +24,11 @@ class _ForumScreenWidgetState extends State<ForumScreenWidget> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            const SizedBox(height: 8),
             for (var message in widget.questions)
-              Text('${message.category}: ${message.topic}'),
-            const SizedBox(height: 8),
+              ListTile(
+                title: Text(message.topic),
+                subtitle: Text(message.question),
+              ),
             OutlinedButton(
               onPressed: () {
                 context.push('/${PageConstants.forum}/add');
