@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xs_life/src/constants/page_constants.dart';
 import 'package:xs_life/src/features/app/presentation/fab_navigation_widget.dart';
-import 'package:xs_life/src/features/forum/domain/ForumQuestion.dart';
+import 'package:xs_life/src/features/forum/domain/forum_question.dart';
 
 class ForumScreenWidget extends StatefulWidget {
   const ForumScreenWidget({super.key, required this.questions});
