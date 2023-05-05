@@ -1,9 +1,6 @@
-import 'package:provider/provider.dart';
-import 'package:xs_life/src/features/app/presentation/app_state.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 class AuthService {
-  static bool loggedIn(context) {
-    final appState = Provider.of<AppState>(context, listen: true);
-    return appState.loggedIn;
+  static bool loggedIn() {
+    return FirebaseAuth.instance.currentUser != null;
   }
 }
