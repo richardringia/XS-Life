@@ -7,7 +7,7 @@ import 'package:xs_life/src/features/app/presentation/app_state.dart';
 import 'package:xs_life/src/features/example_map_screen/presentation/example_map_widget.dart';
 import 'package:xs_life/src/features/forum/presentation/forum_create_form.dart';
 import 'package:xs_life/src/features/forum/presentation/forum_screen_widget.dart';
-import 'package:xs_life/src/features/main_screen/presentation/main_screen_widget.dart';
+import 'package:xs_life/src/features/forum/presentation/forum_state.dart';
 
 class Routes {
   static final router = GoRouter(routes: [
@@ -82,21 +82,19 @@ class Routes {
         GoRoute(
           path: PageConstants.forum,
           builder: (context, state) {
-            return Consumer<AppState>(
-              builder: (context, appState, _) => ForumScreenWidget(
-                questions: appState.forumQuestions,
-              ),
+            final forumState = Provider.of<ForumState>(context, listen: true);
+            return ForumScreenWidget(
+              questions: forumState.forumQuestions,
             );
           },
           routes: [
             GoRoute(
               path: 'add',
               builder: (context, state) {
-                return Consumer<AppState>(
-                  builder: (context, appState, _) => ForumCreateForm(
-                    addQuestion: (category, topic, question) =>
-                        appState.addQuestionToForum(category, topic, question),
-                  ),
+                final forumState = Provider.of<ForumState>(context, listen: true);
+                return ForumCreateForm(
+                  addQuestion: (category, topic, question) =>
+                      forumState.addQuestionToForum(category, topic, question),
                 );
               },
             ),
