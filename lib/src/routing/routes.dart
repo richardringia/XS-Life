@@ -66,12 +66,7 @@ class Routes {
             GoRoute(
               path: 'add',
               builder: (context, state) {
-                final forumState =
-                    Provider.of<ForumState>(context, listen: true);
-                return ForumCreateForm(
-                  addQuestion: (category, topic, question) =>
-                      forumState.addQuestionToForum(category, topic, question),
-                );
+                return const ForumCreateForm();
               },
             ),
             GoRoute(
@@ -84,7 +79,9 @@ class Routes {
                     return Consumer<ForumQuestionState>(
                       builder: (context, appState, _) =>
                           ForumQuestionScreenWidget(
-                              forumQuestion: appState.forumQuestion),
+                        forumQuestion: appState.forumQuestion,
+                        forumQuestionComments: appState.forumQuestionComments,
+                      ),
                     );
                   },
                 );

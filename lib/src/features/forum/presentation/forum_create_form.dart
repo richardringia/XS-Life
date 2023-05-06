@@ -3,15 +3,12 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:xs_life/src/features/forum/data/forum_category.dart';
+import 'package:xs_life/src/features/forum/data/forum_repository.dart';
 
 class ForumCreateForm extends StatefulWidget {
   const ForumCreateForm({
     super.key,
-    required this.addQuestion,
   });
-
-  final FutureOr<void> Function(String category, String topic, String question)
-      addQuestion;
 
   @override
   State<StatefulWidget> createState() => ForumCreateFormState();
@@ -22,6 +19,8 @@ class ForumCreateFormState extends State<ForumCreateForm> {
   final _category = TextEditingController();
   final _topic = TextEditingController();
   final _question = TextEditingController();
+
+  final ForumRepository forumRepository = ForumRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +77,7 @@ class ForumCreateFormState extends State<ForumCreateForm> {
               OutlinedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    await widget.addQuestion(
+                    await forumRepository.addQuestion(
                       _category.text,
                       _topic.text,
                       _question.text,

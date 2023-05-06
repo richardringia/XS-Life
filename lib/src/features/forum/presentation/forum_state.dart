@@ -50,19 +50,4 @@ class ForumState extends ChangeNotifier {
       notifyListeners();
     });
   }
-
-  Future<DocumentReference> addQuestionToForum(
-      String category, String topic, String question) {
-    if (!AuthService.loggedIn()) {
-      throw Exception('Must be logged in');
-    }
-
-    return FirebaseFirestore.instance.collection('forum').add(<String, dynamic>{
-      'category': category,
-      'topic': topic,
-      'question': question,
-      'user_key': FirebaseAuth.instance.currentUser!.uid,
-      'created_at': DateTime.now().millisecondsSinceEpoch,
-    });
-  }
 }
