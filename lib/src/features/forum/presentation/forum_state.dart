@@ -19,6 +19,10 @@ class ForumState extends ChangeNotifier {
 
   List<ForumQuestion> get forumQuestions => _forumQuestions;
 
+  bool _isLoading = true;
+
+  bool get isLoading => _isLoading;
+
   UserRepository userRepository = UserRepository();
 
   Future<void> init() async {
@@ -29,18 +33,20 @@ class ForumState extends ChangeNotifier {
         .listen((snapshot) async {
       _forumQuestions = [];
       for (final document in snapshot.docs) {
-        UserDetail? userDetail = await userRepository.getUserDetails(document.data()['user_key']);
+        UserDetail? userDetail =
+            await userRepository.getUserDetails(document.data()['user_key']);
         if (userDetail != null) {
           _forumQuestions.add(
             ForumQuestion(
+                key: document.id,
                 category: document.data()['category'] as String,
                 topic: document.data()['topic'] as String,
                 question: document.data()['question'] as String,
-                userDetail: userDetail
-            ),
+                userDetail: userDetail),
           );
         }
       }
+      _isLoading = false;
       notifyListeners();
     });
   }

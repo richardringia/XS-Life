@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:xs_life/src/constants/page_constants.dart';
 import 'package:xs_life/src/features/forum/domain/forum_question.dart';
 
 class ForumQuestionCard extends StatelessWidget {
@@ -17,9 +19,27 @@ class ForumQuestionCard extends StatelessWidget {
             title: Text(forumQuestion.userDetail!.getFullName() ?? "Anonymous"),
           ),
           Container(
-            padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
             alignment: Alignment.topLeft,
             child: Text(forumQuestion.question),
+          ),
+          ButtonTheme(
+            child: ButtonBar(
+              alignment: MainAxisAlignment.start,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.thumb_up),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: const Icon(Icons.comment),
+                  onPressed: () {
+                    context.push(
+                        '/${PageConstants.forum}/edit/${forumQuestion.key}');
+                  },
+                ),
+              ],
+            ),
           )
         ],
       ),

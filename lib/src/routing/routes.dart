@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:xs_life/src/constants/page_constants.dart';
-import 'package:xs_life/src/features/app/presentation/app_state.dart';
 import 'package:xs_life/src/features/authentication/application/authentication_actions.dart';
 import 'package:xs_life/src/features/example_map_screen/presentation/example_map_widget.dart';
 import 'package:xs_life/src/features/forum/presentation/forum_create_form.dart';
+import 'package:xs_life/src/features/forum/presentation/forum_question_screen_widget.dart';
+import 'package:xs_life/src/features/forum/presentation/forum_question_state.dart';
 import 'package:xs_life/src/features/forum/presentation/forum_screen_widget.dart';
 import 'package:xs_life/src/features/forum/presentation/forum_state.dart';
 
@@ -58,6 +59,7 @@ class Routes {
             final forumState = Provider.of<ForumState>(context, listen: true);
             return ForumScreenWidget(
               questions: forumState.forumQuestions,
+              isLoading: forumState.isLoading,
             );
           },
           routes: [
@@ -72,6 +74,22 @@ class Routes {
                 );
               },
             ),
+            GoRoute(
+              path: 'edit/:question',
+              builder: (context, state) {
+                return ChangeNotifierProvider(
+                  create: (context) => ForumQuestionState(
+                      state.pathParameters['question'] as String),
+                  builder: (context, child) {
+                    return Consumer<ForumQuestionState>(
+                      builder: (context, appState, _) =>
+                          ForumQuestionScreenWidget(
+                              forumQuestion: appState.forumQuestion),
+                    );
+                  },
+                );
+              },
+            )
           ],
         ),
       ],
