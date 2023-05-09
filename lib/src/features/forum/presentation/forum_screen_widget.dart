@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xs_life/src/common_widgets/loading_screen_widget.dart';
@@ -25,21 +27,26 @@ class _ForumScreenWidgetState extends State<ForumScreenWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Forum"),
         actions: [
-          Visibility(
-            visible: AuthService.loggedIn(),
-            child: IconButton(
-              icon: const Icon(
-                Icons.add,
-                color: Colors.black,
-              ),
-              onPressed: () {
-                context.push('/${PageConstants.forum}/add');
-              },
-            ),
+          Image.asset(
+            'assets/images/Artboard_11.png',
+            height: 120,
+            width: 120,
           ),
         ],
+        toolbarHeight: 100,
+        backgroundColor: Color.fromARGB(255, 255, 110, 14),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  // ignore: prefer_const_literals_to_create_immutables
+                  colors: [
+                Color.fromARGB(255, 255, 110, 14),
+                Color.fromARGB(255, 252, 213, 134)
+              ])),
+        ),
       ),
       body: widget.isLoading
           ? const LoadingScreenWidget()
