@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:xs_life/src/common_widgets/loading_screen_widget.dart';
+import 'package:xs_life/src/constants/entities/Forum.dart';
 import 'package:xs_life/src/features/forum/data/forum_repository.dart';
 import 'package:xs_life/src/features/forum/domain/forum_question.dart';
 import 'package:xs_life/src/features/forum/domain/forum_question_comment.dart';
@@ -20,9 +22,33 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
   final _formKey = GlobalKey<FormState>();
   final _comment = TextEditingController();
   ForumRepository forumRepository = ForumRepository();
+  late String key;
+  late Forum forum = Forum(
+    views: 0,
+    category: "",
+    question: "",
+    topic: "",
+    user_key: "",
+    created_at: 0,
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      setState(() async {
+        await forumRepository.addViewToQuestion(key);
+        forum = await forumRepository.getQuestionByKey(key);
+      });
+    });
+  }
+
   // FirebaseFirestore.instance.collection(CollectionConstants.forumComment)
   @override
   Widget build(BuildContext context) {
+    final router = GoRouter.of(context);
+    key = router.location.split("/").toList().last;
+
     var details = Container(
       // height: 200,
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
@@ -62,9 +88,9 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
                 children: const [Icon(Icons.comment), Text("350 comments")],
               ),
               Column(
-                children: const [
+                children: [
                   Icon(Icons.remove_red_eye_sharp),
-                  Text("100 see")
+                  Text(forum.views.toString() ?? "0 views")
                 ],
               )
             ],
