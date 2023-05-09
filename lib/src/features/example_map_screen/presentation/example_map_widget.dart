@@ -37,46 +37,68 @@ class ExampleMapWidget extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Container(
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 146, 146, 146),
+            color: Color.fromARGB(255, 255, 243, 243),
             borderRadius: BorderRadius.circular(17),
           ),
           margin: const EdgeInsets.all(30),
           child: Stack(
             children: [
-              FlutterMap(
-                options: MapOptions(
-                  center: AppConstants.kmuttLocation,
-                  zoom: 5,
-                  interactiveFlags:
-                      InteractiveFlag.all - InteractiveFlag.rotate,
-                ),
-                children: [
-                  TileLayer(
-                    urlTemplate:
-                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Container(
+                  child: FlutterMap(
+                    options: MapOptions(
+                      center: AppConstants.kmuttLocation,
+                      zoom: 5,
+                      interactiveFlags:
+                          InteractiveFlag.all - InteractiveFlag.rotate,
+                    ),
+                    children: [
+                      TileLayer(
+                        urlTemplate:
+                            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        userAgentPackageName:
+                            'dev.fleaflet.flutter_map.example',
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              Container(
-                alignment: Alignment.center,
-                width: 200,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.orange,
-                  borderRadius: BorderRadius.circular(20.0),
                 ),
-                child: Column(
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    Text(
-                      'KMUTT MAP',
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
+              ),
+              Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  margin: EdgeInsets.only(top: 0),
+                  child: Container(
+                    width: 200,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(20.0),
+                        gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            // ignore: prefer_const_literals_to_create_immutables
+                            colors: [
+                              // ignore: prefer_const_constructors
+                              Color.fromARGB(255, 255, 110, 14),
+                              // ignore: prefer_const_constructors
+                              Color.fromARGB(255, 252, 213, 134)
+                            ])),
+                    child: Center(
+                      child: Column(
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          Text(
+                            'KMUTT MAP',
+                            style: TextStyle(
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
             ],

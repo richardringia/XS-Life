@@ -38,7 +38,7 @@ class _ForumScreenWidgetState extends State<ForumScreenWidget> {
             child: IconButton(
               icon: const Icon(
                 Icons.add,
-                color: Colors.black,
+                color: Color.fromARGB(255, 0, 0, 0),
               ),
               onPressed: () {
                 context.push('/${PageConstants.forum}/add');

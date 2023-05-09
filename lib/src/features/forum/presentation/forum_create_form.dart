@@ -26,7 +26,32 @@ class ForumCreateFormState extends State<ForumCreateForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add question"),
+        actions: [
+          Image.asset(
+            'assets/images/Artboard_11.png',
+            height: 120,
+            width: 120,
+          ),
+        ],
+        toolbarHeight: 100,
+        // ignore: prefer_const_constructors
+        backgroundColor: Color.fromARGB(255, 255, 110, 14),
+        flexibleSpace: Container(
+          // ignore: prefer_const_constructors
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              // ignore: prefer_const_constructors
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  // ignore: prefer_const_literals_to_create_immutables
+                  colors: [
+                    // ignore: prefer_const_constructors
+                    Color.fromARGB(255, 255, 110, 14),
+                    // ignore: prefer_const_constructors
+                    Color.fromARGB(255, 252, 213, 134)
+                  ])),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
