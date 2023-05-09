@@ -29,7 +29,6 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.forumQuestion?.topic ?? ""),
           Text(widget.forumQuestion?.question ?? ""),
         ],
       ),
@@ -144,9 +143,13 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
                             ),
                             Column(
                               children: [
-                                for (ForumQuestionComment test in comments)
+                                for (ForumQuestionComment comment in comments)
                                   ListTile(
-                                    title: Text(test.text),
+                                    leading: const Icon(Icons.person),
+                                    title: Text(
+                                        comment.user_detail.getFullName() ??
+                                            "Anonymous"),
+                                    subtitle: Text(comment.text),
                                   )
                               ],
                             ),
