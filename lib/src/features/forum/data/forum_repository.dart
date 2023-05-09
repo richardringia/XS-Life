@@ -21,14 +21,13 @@ class ForumRepository extends IForumRepository {
 
   @override
   Future<void> addQuestion(
-      String category, String topic, String question) async {
+      String category, String question) async {
     await checkAuth();
 
     FirebaseFirestore.instance
         .collection(CollectionConstants.forum)
         .add(<String, dynamic>{
       'category': category,
-      'topic': topic,
       'question': question,
       'user_key': FirebaseAuth.instance.currentUser!.uid,
       'created_at': DateTime.now().millisecondsSinceEpoch,

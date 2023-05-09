@@ -17,7 +17,6 @@ class ForumCreateForm extends StatefulWidget {
 class ForumCreateFormState extends State<ForumCreateForm> {
   final _formKey = GlobalKey<FormState>();
   final _category = TextEditingController();
-  final _topic = TextEditingController();
   final _question = TextEditingController();
 
   final ForumRepository forumRepository = ForumRepository();
@@ -26,7 +25,32 @@ class ForumCreateFormState extends State<ForumCreateForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add question"),
+        actions: [
+          Image.asset(
+            'assets/images/Artboard_11.png',
+            height: 120,
+            width: 120,
+          ),
+        ],
+        toolbarHeight: 100,
+        // ignore: prefer_const_constructors
+        backgroundColor: Color.fromARGB(255, 255, 110, 14),
+        flexibleSpace: Container(
+          // ignore: prefer_const_constructors
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              // ignore: prefer_const_constructors
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  // ignore: prefer_const_literals_to_create_immutables
+                  colors: [
+                    // ignore: prefer_const_constructors
+                    Color.fromARGB(255, 255, 110, 14),
+                    // ignore: prefer_const_constructors
+                    Color.fromARGB(255, 252, 213, 134)
+                  ])),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -44,20 +68,14 @@ class ForumCreateFormState extends State<ForumCreateForm> {
                     )
                     .toList(),
                 onChanged: (value) {
-                  print(value);
+                  _category.text = value ?? '';
                 },
-              ),
-              TextFormField(
-                controller: _topic,
-                decoration: const InputDecoration(
-                  hintText: 'Topic',
-                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Enter your topic to continue';
+                    return 'Please select a category';
                   }
                   return null;
-                },
+                } ,
               ),
               TextFormField(
                 controller: _question,
@@ -79,7 +97,6 @@ class ForumCreateFormState extends State<ForumCreateForm> {
                   if (_formKey.currentState!.validate()) {
                     await forumRepository.addQuestion(
                       _category.text,
-                      _topic.text,
                       _question.text,
                     );
                   }

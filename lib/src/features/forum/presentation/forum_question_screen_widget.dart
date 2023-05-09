@@ -24,37 +24,80 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
   @override
   Widget build(BuildContext context) {
     var details = Container(
+      // height: 200,
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
       alignment: Alignment.topLeft,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.forumQuestion?.topic ?? ""),
           Text(widget.forumQuestion?.question ?? ""),
         ],
       ),
     );
     var interactions = Container(
-      padding: const EdgeInsets.fromLTRB(16, 32, 16, 32),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Column(
-            children: const [Icon(Icons.thumb_up), Text("999 likes")],
+        padding: const EdgeInsets.fromLTRB(6, 32, 16, 32),
+        child: Container(
+          height: 50,
+          width: 300,
+          decoration: BoxDecoration(
+            // ignore: prefer_const_constructors
+            color: Color.fromARGB(255, 255, 255, 255),
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                spreadRadius: 2,
+                blurRadius: 4,
+                offset: Offset(0, 2),
+              ),
+            ],
           ),
-          Column(
-            children: const [Icon(Icons.comment), Text("350 comments")],
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                children: const [Icon(Icons.thumb_up), Text("999 likes")],
+              ),
+              Column(
+                children: const [Icon(Icons.comment), Text("350 comments")],
+              ),
+              Column(
+                children: const [
+                  Icon(Icons.remove_red_eye_sharp),
+                  Text("100 see")
+                ],
+              )
+            ],
           ),
-          Column(
-            children: const [Icon(Icons.remove_red_eye_sharp), Text("100 see")],
-          )
-        ],
-      ),
-    );
+        ));
     List<ForumQuestionComment> comments = widget.forumQuestionComments ?? [];
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Forum"),
+        actions: [
+          Image.asset(
+            'assets/images/Artboard_11.png',
+            height: 120,
+            width: 120,
+          ),
+        ],
+        toolbarHeight: 100,
+        // ignore: prefer_const_constructors
+        backgroundColor: Color.fromARGB(255, 255, 110, 14),
+        flexibleSpace: Container(
+          // ignore: prefer_const_constructors
+          decoration: BoxDecoration(
+              // ignore: prefer_const_constructors
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  // ignore: prefer_const_literals_to_create_immutables
+                  colors: [
+                // ignore: prefer_const_constructors
+                Color.fromARGB(255, 255, 110, 14),
+                // ignore: prefer_const_constructors
+                Color.fromARGB(255, 252, 213, 134)
+              ])),
+        ),
       ),
       body: widget.forumQuestion == null
           ? const LoadingScreenWidget()
@@ -77,15 +120,37 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
                         child: Column(
                           children: [
                             Container(
-                              child: const Text("----Comment section----"),
+                              height: 50,
+                              width: 200,
+                              // ignore: prefer_const_constructors
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  // ignore: prefer_const_constructors
+                                  gradient: LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      // ignore: prefer_const_literals_to_create_immutables
+                                      colors: [
+                                        // ignore: prefer_const_constructors
+                                        Color.fromARGB(255, 255, 110, 14),
+                                        // ignore: prefer_const_constructors
+                                        Color.fromARGB(255, 253, 206, 111)
+                                      ])),
+                              // ignore: prefer_const_constructors
+                              child: Center(
+                                // ignore: prefer_const_constructors
+                                child: Text(" ----Comment section---- "),
+                              ),
                             ),
                             Column(
                               children: [
                                 for (ForumQuestionComment comment in comments)
                                   ListTile(
-                                    subtitle:
-                                        Text(comment.user_key ?? "Anonymous"),
-                                    title: Text(comment.text),
+                                    leading: const Icon(Icons.person),
+                                    title: Text(
+                                        comment.user_detail.getFullName() ??
+                                            "Anonymous"),
+                                    subtitle: Text(comment.text),
                                   )
                               ],
                             ),
