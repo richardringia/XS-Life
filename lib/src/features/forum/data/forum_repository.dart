@@ -22,7 +22,7 @@ class ForumRepository extends IForumRepository {
       String category, String question) async {
     await checkAuth();
 
-    FirebaseFirestore.instance
+    await FirebaseFirestore.instance
         .collection(CollectionConstants.forum)
         .add(<String, dynamic>{
       'category': category,

@@ -95,10 +95,10 @@ class ForumCreateFormState extends State<ForumCreateForm> {
               OutlinedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    await forumRepository.addQuestion(
+                    forumRepository.addQuestion(
                       _category.text,
                       _question.text,
-                    );
+                    ).then((value) => Navigator.pop(context));
                   }
                   // print(_controller.text);
                 },
