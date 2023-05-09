@@ -6,6 +6,7 @@ import 'package:xs_life/src/common_widgets/loading_screen_widget.dart';
 import 'package:xs_life/src/constants/page_constants.dart';
 import 'package:xs_life/src/features/app/presentation/fab_navigation_widget.dart';
 import 'package:xs_life/src/features/authentication/data/auth_service.dart';
+import 'package:xs_life/src/features/forum/data/forum_category.dart';
 import 'package:xs_life/src/features/forum/domain/forum_question.dart';
 import 'package:xs_life/src/features/forum/presentation/forum_question_card.dart';
 
@@ -22,9 +23,23 @@ class ForumScreenWidget extends StatefulWidget {
 
 class _ForumScreenWidgetState extends State<ForumScreenWidget> {
   ScrollController _scrollController = ScrollController();
+  List<ForumCategory> selectedCategories = [];
 
   @override
   Widget build(BuildContext context) {
+    List<ForumQuestion> questions = widget.questions;
+    if (selectedCategories.isNotEmpty) {
+      questions = questions
+          .where(
+            (question) =>
+                selectedCategories.isEmpty ||
+                selectedCategories.contains(
+                  ForumCategoryHelper.getEnum(question.category),
+                ),
+          )
+          .toList();
+    }
+
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -64,16 +79,51 @@ class _ForumScreenWidgetState extends State<ForumScreenWidget> {
           ? const LoadingScreenWidget()
           : Padding(
               padding: const EdgeInsets.all(16.0),
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.fromLTRB(0, 7, 0, 7),
-                    child: ForumQuestionCard(
-                      forumQuestion: widget.questions[index],
+              child: Column(
+                children: [
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Container(
+                      child: Row(
+                        children: ForumCategory.values
+                            .map(
+                              (category) => Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                child: FilterChip(
+                                  label: Text(
+                                    ForumCategoryHelper.getViewName(category),
+                                  ),
+                                  selected:
+                                      selectedCategories.contains(category),
+                                  onSelected: (bool value) {
+                                    if (value) {
+                                      selectedCategories.add(category);
+                                    } else {
+                                      selectedCategories.remove(category);
+                                    }
+                                    setState(() {});
+                                  },
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
                     ),
-                  );
-                },
-                itemCount: widget.questions.length,
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: const EdgeInsets.fromLTRB(0, 7, 0, 7),
+                          child: ForumQuestionCard(
+                            forumQuestion: questions[index],
+                          ),
+                        );
+                      },
+                      itemCount: questions.length,
+                    ),
+                  ),
+                ],
               ),
             ),
       floatingActionButton: const FabNavigationWidget(),
