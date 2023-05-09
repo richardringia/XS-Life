@@ -80,9 +80,13 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
                             ),
                             Column(
                               children: [
-                                for (ForumQuestionComment test in comments)
+                                for (ForumQuestionComment comment in comments)
                                   ListTile(
-                                    title: Text(test.text),
+                                    leading: const Icon(Icons.person),
+                                    title: Text(
+                                        comment.user_detail.getFullName() ??
+                                            "Anonymous"),
+                                    subtitle: Text(comment.text),
                                   )
                               ],
                             ),

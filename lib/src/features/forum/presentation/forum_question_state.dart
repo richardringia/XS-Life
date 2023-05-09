@@ -50,19 +50,23 @@ class ForumQuestionState extends ChangeNotifier {
             .where('question_key', isEqualTo: question)
             .orderBy('created_at', descending: true)
             .snapshots()
-            .listen((snapshot) {
+            .listen((snapshot) async {
           _forumQuestionComments = [];
           for (final comment in snapshot.docs) {
-            _forumQuestionComments?.add(
-              ForumQuestionComment(
-                comment.id,
-                comment.data()['user_key'],
-                comment.data()['question_key'],
-                comment.data()['text'],
-                DateTime.fromMillisecondsSinceEpoch(
-                    comment.data()['created_at'] * 1000),
-              ),
+            UserDetail? userCommentDetails = await userRepository
+                .getUserDetails(comment.data()['user_key']);
+            if (userCommentDetails != null) {
+              _forumQuestionComments?.add(
+                ForumQuestionComment(
+                  comment.id,
+                  userCommentDetails,
+                  comment.data()['question_key'],
+                  comment.data()['text'],
+                  DateTime.fromMillisecondsSinceEpoch(
+                      comment.data()['created_at'] * 1000),
+                ),
             );
+            }
           }
           notifyListeners();
         });
