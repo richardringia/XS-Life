@@ -16,7 +16,8 @@ class ForumCreateForm extends StatefulWidget {
 
 class ForumCreateFormState extends State<ForumCreateForm> {
   final _formKey = GlobalKey<FormState>();
-  final _category = TextEditingController();
+  ForumCategory? _category;
+  bool categoryHasError = false;
   final _question = TextEditingController();
 
   final ForumRepository forumRepository = ForumRepository();
@@ -58,24 +59,34 @@ class ForumCreateFormState extends State<ForumCreateForm> {
           key: _formKey,
           child: Column(
             children: [
-              DropdownButtonFormField(
-                items: ForumCategory.values
-                    .map(
-                      (e) => DropdownMenuItem(
-                        value: e.name,
-                        child: Text(ForumCategoryHelper.getViewName(e)),
-                      ),
-                    )
-                    .toList(),
-                onChanged: (value) {
-                  _category.text = value ?? '';
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please select a category';
-                  }
-                  return null;
-                } ,
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: ForumCategory.values
+                      .map(
+                        (category) => Container(
+                          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: FilterChip(
+                            label: Text(
+                              ForumCategoryHelper.getViewName(category),
+                            ),
+                            selected: category == _category,
+                            onSelected: (bool value) {
+                              if (value) {
+                                setState(() {
+                                  _category = category;
+                                });
+                              } else {
+                                setState(() {
+                                  _category = null;
+                                });
+                              }
+                            },
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
               ),
               TextFormField(
                 controller: _question,
@@ -95,10 +106,29 @@ class ForumCreateFormState extends State<ForumCreateForm> {
               OutlinedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    forumRepository.addQuestion(
-                      _category.text,
-                      _question.text,
-                    ).then((value) => Navigator.pop(context));
+                    if (_category == null) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('Error'),
+                          content: const Text('Please select a category'),
+                          actions: [
+                            ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Close'))
+                          ],
+                        ),
+                      );
+                    } else {
+                      forumRepository
+                          .addQuestion(
+                            _category!.name,
+                            _question.text,
+                          )
+                          .then((value) => Navigator.pop(context));
+                    }
                   }
                   // print(_controller.text);
                 },
