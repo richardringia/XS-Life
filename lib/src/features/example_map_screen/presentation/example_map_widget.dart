@@ -49,7 +49,7 @@ class ExampleMapWidget extends StatelessWidget {
                   child: FlutterMap(
                     options: MapOptions(
                       center: AppConstants.kmuttLocation,
-                      zoom: 5,
+                      zoom: AppConstants.mapZoom,
                       interactiveFlags:
                           InteractiveFlag.all - InteractiveFlag.rotate,
                     ),
