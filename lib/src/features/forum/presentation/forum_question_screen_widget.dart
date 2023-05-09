@@ -61,7 +61,7 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
       ),
     );
     var interactions = Container(
-        padding: const EdgeInsets.fromLTRB(6, 32, 16, 32),
+        padding: const EdgeInsets.fromLTRB(6, 34, 16, 32),
         child: Container(
           height: 50,
           width: 300,
@@ -74,22 +74,69 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
                 color: Colors.black.withOpacity(0.2),
                 spreadRadius: 2,
                 blurRadius: 4,
+                // ignore: prefer_const_constructors
                 offset: Offset(0, 2),
               ),
             ],
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Column(
-                children: const [Icon(Icons.thumb_up), Text("999 likes")],
+              Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: Column(
+                  children: const [
+                    Icon(
+                      Icons.thumb_up,
+                      color: Color.fromARGB(255, 39, 138, 252),
+                    ),
+                    Text("999 likes")
+                  ],
+                ),
+              ),
+              // ignore: prefer_const_constructors
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                // ignore: prefer_const_constructors
+                child: VerticalDivider(
+                  // ignore: prefer_const_constructors
+                  color: Color.fromARGB(255, 221, 221, 221),
+                  thickness: 3,
+                  width: 10,
+                ),
               ),
               Column(
-                children: const [Icon(Icons.comment), Text("350 comments")],
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(5, 3, 3, 2),
+                    child: Icon(
+                      Icons.comment,
+                      color: Color.fromARGB(255, 244, 156, 5),
+                    ),
+                  ),
+                  Text("350 comments")
+                ],
+              ),
+              // ignore: prefer_const_constructors
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                // ignore: prefer_const_constructors
+                child: VerticalDivider(
+                  // ignore: prefer_const_constructors
+                  color: Color.fromARGB(255, 209, 209, 209),
+                  thickness: 3,
+                  width: 10,
+                ),
               ),
               Column(
-                children: [
-                  Icon(Icons.remove_red_eye_sharp),
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(5, 3, 3, 2),
+                    child: Icon(
+                      Icons.remove_red_eye_sharp,
+                      color: Color.fromARGB(255, 30, 164, 110),
+                    ),
+                  ),
                   Text(forum.views.toString() ?? "0 views")
                 ],
               )
