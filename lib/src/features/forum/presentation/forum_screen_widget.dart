@@ -33,6 +33,18 @@ class _ForumScreenWidgetState extends State<ForumScreenWidget> {
             height: 120,
             width: 120,
           ),
+          Visibility(
+            visible: AuthService.loggedIn(),
+            child: IconButton(
+              icon: const Icon(
+                Icons.add,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                context.push('/${PageConstants.forum}/add');
+              },
+            ),
+          ),
         ],
         toolbarHeight: 100,
         backgroundColor: Color.fromARGB(255, 255, 110, 14),

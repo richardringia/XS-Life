@@ -70,7 +70,7 @@ class ExampleMapWidget extends StatelessWidget {
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     Text(
-                      'Hello, world!',
+                      'KMUTT MAP',
                       style: TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
