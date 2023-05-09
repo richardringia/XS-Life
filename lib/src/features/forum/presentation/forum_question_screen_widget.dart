@@ -28,7 +28,6 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.forumQuestion?.topic ?? ""),
           Text(widget.forumQuestion?.question ?? ""),
         ],
       ),

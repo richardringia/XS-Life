@@ -40,7 +40,6 @@ class ForumState extends ChangeNotifier {
             ForumQuestion(
                 key: document.id,
                 category: document.data()['category'] as String,
-                topic: document.data()['topic'] as String,
                 question: document.data()['question'] as String,
                 userDetail: userDetail),
           );

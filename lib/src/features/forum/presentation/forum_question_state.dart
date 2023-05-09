@@ -39,7 +39,6 @@ class ForumQuestionState extends ChangeNotifier {
       if (userDetail != null) {
         _forumQuestion = ForumQuestion(
           category: questionResult.data()?['category'] as String,
-          topic: questionResult.data()?['topic'] as String,
           question: questionResult.data()?['question'] as String,
           key: questionResult.id,
           userDetail: userDetail,

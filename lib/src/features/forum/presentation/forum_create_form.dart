@@ -17,7 +17,6 @@ class ForumCreateForm extends StatefulWidget {
 class ForumCreateFormState extends State<ForumCreateForm> {
   final _formKey = GlobalKey<FormState>();
   final _category = TextEditingController();
-  final _topic = TextEditingController();
   final _question = TextEditingController();
 
   final ForumRepository forumRepository = ForumRepository();
@@ -44,20 +43,14 @@ class ForumCreateFormState extends State<ForumCreateForm> {
                     )
                     .toList(),
                 onChanged: (value) {
-                  print(value);
+                  _category.text = value ?? '';
                 },
-              ),
-              TextFormField(
-                controller: _topic,
-                decoration: const InputDecoration(
-                  hintText: 'Topic',
-                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Enter your topic to continue';
+                    return 'Please select a category';
                   }
                   return null;
-                },
+                } ,
               ),
               TextFormField(
                 controller: _question,
@@ -79,7 +72,6 @@ class ForumCreateFormState extends State<ForumCreateForm> {
                   if (_formKey.currentState!.validate()) {
                     await forumRepository.addQuestion(
                       _category.text,
-                      _topic.text,
                       _question.text,
                     );
                   }
