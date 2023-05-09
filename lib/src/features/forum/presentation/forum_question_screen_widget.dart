@@ -6,7 +6,8 @@ import 'package:xs_life/src/features/forum/domain/forum_question_comment.dart';
 
 class ForumQuestionScreenWidget extends StatefulWidget {
   const ForumQuestionScreenWidget(
-      {super.key, this.forumQuestion, this.forumQuestionComments});
+      {Key? key, this.forumQuestion, this.forumQuestionComments})
+      : super(key: key);
 
   final ForumQuestion? forumQuestion;
   final List<ForumQuestionComment>? forumQuestionComments;
@@ -19,7 +20,7 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
   final _formKey = GlobalKey<FormState>();
   final _comment = TextEditingController();
   ForumRepository forumRepository = ForumRepository();
-
+  // FirebaseFirestore.instance.collection(CollectionConstants.forumComment)
   @override
   Widget build(BuildContext context) {
     var details = Container(
@@ -76,13 +77,15 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
                         child: Column(
                           children: [
                             Container(
-                              child: Text("----Comment section----"),
+                              child: const Text("----Comment section----"),
                             ),
                             Column(
                               children: [
-                                for (ForumQuestionComment test in comments)
+                                for (ForumQuestionComment comment in comments)
                                   ListTile(
-                                    title: Text(test.text),
+                                    subtitle:
+                                        Text(comment.user_key ?? "Anonymous"),
+                                    title: Text(comment.text),
                                   )
                               ],
                             ),
@@ -90,18 +93,10 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
                               key: _formKey,
                               child: TextFormField(
                                 controller: _comment,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   suffixIcon: IconButton(
                                     icon: Icon(Icons.send),
-                                    onPressed: () async {
-                                      if (_formKey.currentState!.validate()) {
-                                        await forumRepository
-                                            .addCommentToQuestion(
-                                                widget.forumQuestion!.key,
-                                                _comment.text);
-                                        _comment.clear();
-                                      }
-                                    },
+                                    onPressed: null,
                                   ),
                                 ),
                                 validator: (value) {
