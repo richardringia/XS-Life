@@ -8,7 +8,9 @@ class ForumRepository extends IForumRepository {
   Future<void> addCommentToQuestion(String question_key, String text) async {
     await checkAuth();
 
-    FirebaseFirestore.instance.collection(CollectionConstants.forumComment).add({
+    FirebaseFirestore.instance
+        .collection(CollectionConstants.forumComment)
+        .add({
       'question_key': question_key,
       'text': text,
       'votes': 0,
@@ -30,6 +32,9 @@ class ForumRepository extends IForumRepository {
       'question': question,
       'user_key': FirebaseAuth.instance.currentUser!.uid,
       'created_at': DateTime.now().millisecondsSinceEpoch,
+      'views': 0
     });
   }
+
+  
 }
