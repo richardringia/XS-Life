@@ -20,6 +20,7 @@ class NavigationFab extends StatelessWidget {
       visible: !(ModalRoute.of(context)?.settings.name == location),
       child: Container(
         margin: const EdgeInsets.all(10),
+        // icon
         child: FloatingActionButton(
           heroTag: location,
           onPressed: onPressed ??

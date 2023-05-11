@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:xs_life/src/constants/page_constants.dart';
-import 'package:xs_life/src/features/app/presentation/app_state.dart';
+import 'package:xs_life/src/features/authentication/application/authentication_actions.dart';
 import 'package:xs_life/src/features/example_map_screen/presentation/example_map_widget.dart';
 import 'package:xs_life/src/features/forum/presentation/forum_create_form.dart';
+import 'package:xs_life/src/features/forum/presentation/forum_question_screen_widget.dart';
+import 'package:xs_life/src/features/forum/presentation/forum_question_state.dart';
 import 'package:xs_life/src/features/forum/presentation/forum_screen_widget.dart';
-import 'package:xs_life/src/features/main_screen/presentation/main_screen_widget.dart';
+import 'package:xs_life/src/features/forum/presentation/forum_state.dart';
 
 class Routes {
   static final router = GoRouter(routes: [
@@ -20,36 +22,8 @@ class Routes {
           builder: (context, state) {
             return SignInScreen(
               actions: [
-                ForgotPasswordAction(((context, email) {
-                  final uri = Uri(
-                    path: '/sign-in/forgot-password',
-                    queryParameters: <String, String?>{
-                      'email': email,
-                    },
-                  );
-                  context.push(uri.toString());
-                })),
-                AuthStateChangeAction(((context, state) {
-                  if (state is SignedIn || state is UserCreated) {
-                    var user = (state is SignedIn)
-                        ? state.user
-                        : (state as UserCreated).credential.user;
-                    if (user == null) {
-                      return;
-                    }
-                    if (state is UserCreated) {
-                      user.updateDisplayName(user.email!.split('@')[0]);
-                    }
-                    if (!user.emailVerified) {
-                      user.sendEmailVerification();
-                      const snackBar = SnackBar(
-                          content: Text(
-                              'Please check your email to verify your email address'));
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    }
-                    context.pushReplacement('/');
-                  }
-                })),
+                AuthenticationActions.forgotPassword,
+                AuthenticationActions.authStateChangeAction,
               ],
             );
           },
@@ -73,7 +47,7 @@ class Routes {
               providers: const [],
               actions: [
                 SignedOutAction((context) {
-                  context.pushReplacement('/');
+                  context.replace("/");
                 }),
               ],
             );
@@ -82,24 +56,37 @@ class Routes {
         GoRoute(
           path: PageConstants.forum,
           builder: (context, state) {
-            return Consumer<AppState>(
-              builder: (context, appState, _) => ForumScreenWidget(
-                questions: appState.forumQuestions,
-              ),
+            final forumState = Provider.of<ForumState>(context, listen: true);
+            return ForumScreenWidget(
+              questions: forumState.forumQuestions,
+              isLoading: forumState.isLoading,
             );
           },
           routes: [
             GoRoute(
               path: 'add',
               builder: (context, state) {
-                return Consumer<AppState>(
-                  builder: (context, appState, _) => ForumCreateForm(
-                    addQuestion: (category, topic, question) =>
-                        appState.addQuestionToForum(category, topic, question),
-                  ),
-                );
+                return const ForumCreateForm();
               },
             ),
+            GoRoute(
+              path: 'edit/:question',
+              builder: (context, state) {
+                return ChangeNotifierProvider(
+                  create: (context) => ForumQuestionState(
+                      state.pathParameters['question'] as String),
+                  builder: (context, child) {
+                    return Consumer<ForumQuestionState>(
+                      builder: (context, appState, _) =>
+                          ForumQuestionScreenWidget(
+                        forumQuestion: appState.forumQuestion,
+                        forumQuestionComments: appState.forumQuestionComments,
+                      ),
+                    );
+                  },
+                );
+              },
+            )
           ],
         ),
       ],

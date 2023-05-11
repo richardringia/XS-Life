@@ -3,15 +3,12 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:xs_life/src/features/forum/data/forum_category.dart';
+import 'package:xs_life/src/features/forum/data/forum_repository.dart';
 
 class ForumCreateForm extends StatefulWidget {
   const ForumCreateForm({
     super.key,
-    required this.addQuestion,
   });
-
-  final FutureOr<void> Function(String category, String topic, String question)
-      addQuestion;
 
   @override
   State<StatefulWidget> createState() => ForumCreateFormState();
@@ -19,15 +16,42 @@ class ForumCreateForm extends StatefulWidget {
 
 class ForumCreateFormState extends State<ForumCreateForm> {
   final _formKey = GlobalKey<FormState>();
-  final _category = TextEditingController();
-  final _topic = TextEditingController();
+  ForumCategory? _category;
+  bool categoryHasError = false;
   final _question = TextEditingController();
+
+  final ForumRepository forumRepository = ForumRepository();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add question"),
+        actions: [
+          Image.asset(
+            'assets/images/Artboard_11.png',
+            height: 120,
+            width: 120,
+          ),
+        ],
+        toolbarHeight: 100,
+        // ignore: prefer_const_constructors
+        backgroundColor: Color.fromARGB(255, 255, 110, 14),
+        flexibleSpace: Container(
+          // ignore: prefer_const_constructors
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              // ignore: prefer_const_constructors
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  // ignore: prefer_const_literals_to_create_immutables
+                  colors: [
+                    // ignore: prefer_const_constructors
+                    Color.fromARGB(255, 255, 110, 14),
+                    // ignore: prefer_const_constructors
+                    Color.fromARGB(255, 252, 213, 134)
+                  ])),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -35,30 +59,34 @@ class ForumCreateFormState extends State<ForumCreateForm> {
           key: _formKey,
           child: Column(
             children: [
-              DropdownButtonFormField(
-                items: ForumCategory.values
-                    .map(
-                      (e) => DropdownMenuItem(
-                        value: e.name,
-                        child: Text(ForumCategoryHelper.getViewName(e)),
-                      ),
-                    )
-                    .toList(),
-                onChanged: (value) {
-                  print(value);
-                },
-              ),
-              TextFormField(
-                controller: _topic,
-                decoration: const InputDecoration(
-                  hintText: 'Topic',
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: ForumCategory.values
+                      .map(
+                        (category) => Container(
+                          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: FilterChip(
+                            label: Text(
+                              ForumCategoryHelper.getViewName(category),
+                            ),
+                            selected: category == _category,
+                            onSelected: (bool value) {
+                              if (value) {
+                                setState(() {
+                                  _category = category;
+                                });
+                              } else {
+                                setState(() {
+                                  _category = null;
+                                });
+                              }
+                            },
+                          ),
+                        ),
+                      )
+                      .toList(),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Enter your topic to continue';
-                  }
-                  return null;
-                },
               ),
               TextFormField(
                 controller: _question,
@@ -78,11 +106,29 @@ class ForumCreateFormState extends State<ForumCreateForm> {
               OutlinedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    await widget.addQuestion(
-                      _category.text,
-                      _topic.text,
-                      _question.text,
-                    );
+                    if (_category == null) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('Error'),
+                          content: const Text('Please select a category'),
+                          actions: [
+                            ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Close'))
+                          ],
+                        ),
+                      );
+                    } else {
+                      forumRepository
+                          .addQuestion(
+                            _category!.name,
+                            _question.text,
+                          )
+                          .then((value) => Navigator.pop(context));
+                    }
                   }
                   // print(_controller.text);
                 },

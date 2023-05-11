@@ -1,24 +1,44 @@
 enum ForumCategory {
-  category1,
-  category2,
-  category3,
-  category4,
-  category5,
+  clubs,
+  sports,
+  food,
+  buildings,
+  classes,
+  other,
 }
 
 class ForumCategoryHelper {
   static getViewName(ForumCategory forumCategory) {
     switch (forumCategory) {
-      case ForumCategory.category2:
-        return "Category 2";
-      case ForumCategory.category3:
-        return "Category 3";
-      case ForumCategory.category4:
-        return "Category 4";
-      case ForumCategory.category5:
-        return "Category 5";
+      case ForumCategory.clubs:
+        return "Clubs";
+      case ForumCategory.sports:
+        return "Sports";
+      case ForumCategory.food:
+        return "Food";
+      case ForumCategory.buildings:
+        return "Buildings";
+      case ForumCategory.classes:
+        return "Classes";
       default:
-        return "Category 1";
+        return "Other";
+    }
+  }
+
+  static ForumCategory getEnum(String forumCategory) {
+    switch (forumCategory) {
+      case "clubs":
+        return ForumCategory.clubs;
+      case "sports":
+        return ForumCategory.sports;
+      case "food":
+        return ForumCategory.food;
+      case "buildings":
+        return ForumCategory.buildings;
+      case "classes":
+        return ForumCategory.classes;
+      default:
+        return ForumCategory.other;
     }
   }
 }

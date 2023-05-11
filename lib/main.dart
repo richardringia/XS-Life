@@ -7,8 +7,10 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GlobalConfiguration().loadFromAsset("app_settings");
-  runApp(ChangeNotifierProvider(
-    create: (context) => AppState(),
-    builder: ((context, child) => const App()),
-  ));
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => AppState(),
+      builder: ((context, child) => const App()),
+    ),
+  );
 }
