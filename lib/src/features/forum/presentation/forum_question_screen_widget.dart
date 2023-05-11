@@ -23,7 +23,7 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
   final _comment = TextEditingController();
   ForumRepository forumRepository = ForumRepository();
   late String key;
-  late Forum forum = Forum(
+  Forum forum = Forum(
     views: 0,
     category: "",
     question: "",
@@ -49,6 +49,7 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
     final router = GoRouter.of(context);
     key = router.location.split("/").toList().last;
 
+
     var details = Container(
       // height: 200,
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
@@ -60,6 +61,7 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
         ],
       ),
     );
+
     var interactions = Container(
         padding: const EdgeInsets.fromLTRB(6, 34, 16, 32),
         child: Container(
@@ -129,15 +131,15 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
                 ),
               ),
               Column(
-                children: const [
-                  Padding(
+                children: [
+                  const Padding(
                     padding: EdgeInsets.fromLTRB(5, 3, 3, 2),
                     child: Icon(
                       Icons.remove_red_eye_sharp,
                       color: Color.fromARGB(255, 30, 164, 110),
                     ),
                   ),
-                  Text(forum.views.toString() ?? "0 views")
+                  Text("${forum.views} views")
                 ],
               )
             ],

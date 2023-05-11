@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xs_life/src/constants/page_constants.dart';
+import 'package:xs_life/src/features/forum/data/forum_repository.dart';
 import 'package:xs_life/src/features/forum/domain/forum_question.dart';
 
 class ForumQuestionCard extends StatelessWidget {
@@ -10,6 +11,8 @@ class ForumQuestionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ForumRepository forumRepository = ForumRepository();
+
     return Card(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -29,7 +32,9 @@ class ForumQuestionCard extends StatelessWidget {
               children: [
                 IconButton(
                   icon: const Icon(Icons.thumb_up),
-                  onPressed: () {},
+                  onPressed: () {
+                    forumRepository.likeQuestion(forumQuestion.key);
+                  },
                 ),
                 IconButton(
                   icon: const Icon(Icons.comment),

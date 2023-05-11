@@ -6,4 +6,5 @@ abstract class IForumRepository extends IRepository {
   Future<void> addCommentToQuestion(String question_key, String text);
   Future<Forum> getQuestionByKey(String key);
   Future<void> addViewToQuestion(String key);
+  Future<void> likeQuestion(String question_key);
 }
