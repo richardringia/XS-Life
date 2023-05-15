@@ -5,12 +5,17 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:xs_life/src/constants/app_constants.dart';
 import 'package:xs_life/src/features/app/presentation/fab_navigation_widget.dart';
+import 'package:xs_life/src/features/map/data/map_repository.dart';
 
 class ExampleMapWidget extends StatelessWidget {
   const ExampleMapWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    MapRepository mapRepository = MapRepository();
+    mapRepository.getCategories();
+
+
     return Scaffold(
       appBar: AppBar(
         actions: [
