@@ -7,6 +7,7 @@ import 'package:xs_life/src/features/app/presentation/fab_navigation_widget.dart
 import 'package:xs_life/src/features/map/domain/map_category.dart';
 import 'package:xs_life/src/features/map/domain/map_item.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:xs_life/src/features/map/presentation/map_filter_dialog.dart';
 import 'package:xs_life/src/features/map/presentation/map_item_dialog.dart';
 
 class MapScreenWidget extends StatefulWidget {
@@ -46,18 +47,23 @@ class MapScreenWidgetState extends State<MapScreenWidget> {
     );
   }
 
+  List<MapCategory> selectedCategories = [];
+
   @override
   Widget build(BuildContext context) {
     var marker = <Marker>[];
 
     if (widget.mapItems.isNotEmpty) {
       for (MapItem element in widget.mapItems) {
-        marker.add(Marker(
-          point: LatLng(element.lat, element.long),
-          builder: (context) {
-            return getMarker(element);
-          },
-        ));
+        if (selectedCategories.isEmpty ||
+            selectedCategories.contains(element.category)) {
+          marker.add(Marker(
+            point: LatLng(element.lat, element.long),
+            builder: (context) {
+              return getMarker(element);
+            },
+          ));
+        }
       }
     }
 
@@ -118,6 +124,28 @@ class MapScreenWidgetState extends State<MapScreenWidget> {
                             ),
                           ],
                         ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: IconButton(
+                        onPressed: () async {
+                          // setState(() async {
+                          //   selectedCategories =
+                          // });
+                          await showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return MapFilterDialog(
+                                  mapCategories: widget.mapCategories,
+                                  selected: selectedCategories);
+                            },
+                          );
+                          setState(() {
+
+                          });
+                        },
+                        icon: const Icon(Icons.find_in_page),
                       ),
                     ),
                     Align(
