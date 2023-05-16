@@ -6,6 +6,8 @@ import 'package:xs_life/src/constants/app_constants.dart';
 import 'package:xs_life/src/features/app/presentation/fab_navigation_widget.dart';
 import 'package:xs_life/src/features/map/domain/map_category.dart';
 import 'package:xs_life/src/features/map/domain/map_item.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:xs_life/src/features/map/presentation/map_item_dialog.dart';
 
 class MapScreenWidget extends StatefulWidget {
   const MapScreenWidget(
@@ -23,8 +25,42 @@ class MapScreenWidget extends StatefulWidget {
 }
 
 class MapScreenWidgetState extends State<MapScreenWidget> {
+  getMarker(MapItem mapItem) {
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return MapItemDialog(mapItem: mapItem);
+          },
+        );
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(50),
+        child: Image.network(
+          'https://cdn-icons-png.flaticon.com/512/1946/1946770.png',
+          height: 30,
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    var marker = <Marker>[];
+
+    if (widget.mapItems.isNotEmpty) {
+      for (MapItem element in widget.mapItems) {
+        marker.add(Marker(
+          point: LatLng(element.lat, element.long),
+          builder: (context) {
+            return getMarker(element);
+          },
+        ));
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -77,6 +113,9 @@ class MapScreenWidgetState extends State<MapScreenWidget> {
                                   'dev.fleaflet.flutter_map.example',
                             ),
                             CurrentLocationLayer(),
+                            MarkerLayer(
+                              markers: marker,
+                            ),
                           ],
                         ),
                       ),
