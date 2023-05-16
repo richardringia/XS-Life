@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:xs_life/src/constants/page_constants.dart';
 import 'package:xs_life/src/features/app/presentation/splash_screen_widget.dart';
 import 'package:xs_life/src/features/authentication/application/authentication_actions.dart';
+import 'package:xs_life/src/features/authentication/presentation/profile_edit_screen_widget.dart';
+import 'package:xs_life/src/features/authentication/presentation/profile_edit_state.dart';
 import 'package:xs_life/src/features/forum/presentation/forum_create_form.dart';
 import 'package:xs_life/src/features/forum/presentation/forum_question_screen_widget.dart';
 import 'package:xs_life/src/features/forum/presentation/forum_question_state.dart';
@@ -46,19 +48,31 @@ class Routes {
         GoRoute(
           path: PageConstants.profile,
           builder: (context, state) {
-            return ProfileScreen(
-              providers: const [],
-              actions: [
-                SignedOutAction((context) {
-                  context.replace("/${PageConstants.map}");
-                }),
-              ],
+            return ChangeNotifierProvider(
+              create: (context) => ProfileEditState(),
+              builder: (context, child) {
+                return Consumer<ProfileEditState>(
+                  builder: (context, profileEditState, _) =>
+                      ProfileEditScreenWidget(
+                    userDetail: profileEditState.userDetail,
+                    isLoading: profileEditState.isLoading,
+                  ),
+                );
+              },
             );
+            // return ProfileEditScreenWidget();
+            // return ProfileScreen(
+            //   providers: const [],
+            //   actions: [
+            //     SignedOutAction((context) {
+            //       context.replace("/${PageConstants.map}");
+            //     }),
+            //   ],
+            // );
           },
         ),
         GoRoute(
           path: PageConstants.map,
-          // builder: (context, state) => const ExampleMapWidget()
           builder: (context, state) {
             return ChangeNotifierProvider(
               create: (context) => MapState(),

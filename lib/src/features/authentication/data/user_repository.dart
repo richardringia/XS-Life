@@ -27,4 +27,17 @@ class UserRepository extends IUserRepository {
     }
     return null;
   }
+
+  @override
+  Future<bool> isUserEmpty(User user) async {
+    return true;
+  }
+
+  @override
+  Future<void> updateUser(UserDetail userDetail) async {
+    var userDoc = await collection.where("user_key", isEqualTo: userDetail.uid).get();
+    if (userDoc.size > 0) {
+      userDoc.docs[0].reference.update(userDetail.toMap());
+    }
+  }
 }

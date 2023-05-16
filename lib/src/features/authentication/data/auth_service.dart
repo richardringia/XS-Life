@@ -3,4 +3,8 @@ class AuthService {
   static bool loggedIn() {
     return FirebaseAuth.instance.currentUser != null;
   }
+
+  static String getUid() {
+    return FirebaseAuth.instance.currentUser!.uid;
+  }
 }

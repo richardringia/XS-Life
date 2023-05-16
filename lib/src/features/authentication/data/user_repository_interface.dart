@@ -7,5 +7,7 @@ abstract class IUserRepository {
 
   Future<void> checkLoggedInUser(User user);
   Future<void> createUser(UserDetail userDetail);
+  Future<void> updateUser(UserDetail userDetail);
+  Future<bool> isUserEmpty(User user);
   Future<UserDetail?> getUserDetails(uid);
 }
