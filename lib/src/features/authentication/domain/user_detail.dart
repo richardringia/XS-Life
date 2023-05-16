@@ -1,7 +1,7 @@
 class UserDetail {
   final String uid;
-  final String firstname;
-  final String lastname;
+  String firstname;
+  String lastname;
   final String details;
   final String role = "default";
 
