@@ -22,6 +22,7 @@ class App extends StatelessWidget {
               ),
           primarySwatch: Colors.orange,
           visualDensity: VisualDensity.adaptivePlatformDensity,
+          // ignore: prefer_const_constructors
           scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255),
         ),
         routerConfig: Routes.router,
