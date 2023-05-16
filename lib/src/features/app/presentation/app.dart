@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:xs_life/src/constants/color_constants.dart';
 import 'package:xs_life/src/features/app/presentation/app_state.dart';
 import 'package:xs_life/src/features/forum/presentation/forum_state.dart';
 import 'package:xs_life/src/routing/routes.dart';

@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
@@ -12,10 +10,6 @@ class ExampleMapWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MapRepository mapRepository = MapRepository();
-    mapRepository.getCategories();
-
-
     return Scaffold(
       appBar: AppBar(
         actions: [
