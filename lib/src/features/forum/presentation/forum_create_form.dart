@@ -55,92 +55,154 @@ class ForumCreateFormState extends State<ForumCreateForm> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: ForumCategory.values
-                      .map(
-                        (category) => Container(
-                          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          child: FilterChip(
-                            label: Text(
-                              ForumCategoryHelper.getViewName(category),
+        child: Container(
+          // ignore: prefer_const_constructors
+          color: Color.fromARGB(131, 169, 169, 169),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Container(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 20, 5, 0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 255, 243, 216),
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                        height: 80,
+                        child: Row(
+                          children: ForumCategory.values
+                              .map(
+                                (category) => Container(
+                                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  child: FilterChip(
+                                    selectedColor:
+                                        Color.fromARGB(255, 255, 159, 14),
+                                    backgroundColor:
+                                        Color.fromARGB(248, 253, 211, 121),
+                                    label: Text(
+                                      ForumCategoryHelper.getViewName(category),
+                                    ),
+                                    selected: category == _category,
+                                    onSelected: (bool value) {
+                                      if (value) {
+                                        setState(() {
+                                          _category = category;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          _category = null;
+                                        });
+                                      }
+                                    },
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                // Section 2
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 30, 8, 0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 255, 243, 216),
+                      borderRadius: BorderRadius.circular(17),
+                    ),
+                    child: Column(
+                      // lookink array from here
+                      children: [
+                        // section 1
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(8, 50, 8, 0),
+                          child: Container(
+                            color: Color.fromARGB(255, 255, 243, 216),
+                            // Textformfield
+                            child: TextFormField(
+                              controller: _question,
+                              keyboardType: TextInputType.multiline,
+                              minLines: 3,
+                              maxLines: 8,
+                              decoration: const InputDecoration(
+                                hintText: 'Question',
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Enter your question to continue';
+                                }
+                                return null;
+                              },
                             ),
-                            selected: category == _category,
-                            onSelected: (bool value) {
-                              if (value) {
-                                setState(() {
-                                  _category = category;
-                                });
-                              } else {
-                                setState(() {
-                                  _category = null;
-                                });
-                              }
-                            },
                           ),
                         ),
-                      )
-                      .toList(),
-                ),
-              ),
-              TextFormField(
-                controller: _question,
-                keyboardType: TextInputType.multiline,
-                minLines: 3,
-                maxLines: 8,
-                decoration: const InputDecoration(
-                  hintText: 'Question',
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Enter your question to continue';
-                  }
-                  return null;
-                },
-              ),
-              OutlinedButton(
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    if (_category == null) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text('Error'),
-                          content: const Text('Please select a category'),
-                          actions: [
-                            ElevatedButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('Close'))
-                          ],
+
+                        //  end section 1
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(8, 20, 8, 20),
+                          child: OutlinedButton(
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  if (_category == null) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: const Text('Error'),
+                                        content: const Text(
+                                            'Please select a category'),
+                                        actions: [
+                                          ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: const Text('Close'))
+                                        ],
+                                      ),
+                                    );
+                                  } else {
+                                    forumRepository
+                                        .addQuestion(
+                                          _category!.name,
+                                          _question.text,
+                                        )
+                                        .then(
+                                            (value) => Navigator.pop(context));
+                                  }
+                                }
+                                // print(_controller.text);
+                              },
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Color.fromARGB(255, 255, 159, 14)),
+                              ),
+                              child: Container(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Text(
+                                      'SEND',
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ],
+                                ),
+                              )),
                         ),
-                      );
-                    } else {
-                      forumRepository
-                          .addQuestion(
-                            _category!.name,
-                            _question.text,
-                          )
-                          .then((value) => Navigator.pop(context));
-                    }
-                  }
-                  // print(_controller.text);
-                },
-                child: Row(
-                  children: const [
-                    Icon(Icons.send),
-                    SizedBox(width: 4),
-                    Text('SEND'),
-                  ],
+                      ],
+
+                      // the end of the section
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                // the end of setion button
+              ],
+            ),
           ),
         ),
       ),

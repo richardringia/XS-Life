@@ -73,6 +73,8 @@ class ExampleMapWidget extends StatelessWidget {
                   child: Container(
                     width: 200,
                     height: 50,
+
+                    // this is a part to set the color of
                     decoration: BoxDecoration(
                         color: Colors.orange,
                         borderRadius: BorderRadius.circular(20.0),
@@ -84,16 +86,16 @@ class ExampleMapWidget extends StatelessWidget {
                               Color.fromARGB(255, 255, 110, 14),
                               Color.fromARGB(255, 252, 213, 134)
                             ])),
-                    child: Center(
-                      child: Column(
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          Text(
-                            'KMUTT MAP',
-                            style: TextStyle(fontSize: 24.0),
-                          ),
-                        ],
-                      ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: [
+                        Text(
+                          'KMUTT MAP',
+                          style: TextStyle(fontSize: 24.0),
+                        ),
+                      ],
                     ),
                   ),
                 ),
