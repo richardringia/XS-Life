@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xs_life/src/common_widgets/loading_screen_widget.dart';
@@ -49,16 +51,18 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
     final router = GoRouter.of(context);
     key = router.location.split("/").toList().last;
 
-
-    var details = Container(
-      // height: 200,
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-      alignment: Alignment.topLeft,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(widget.forumQuestion?.question ?? ""),
-        ],
+    var details = Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        // height: 200,
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+        alignment: Alignment.topLeft,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(widget.forumQuestion?.question ?? ""),
+          ],
+        ),
       ),
     );
 
@@ -191,53 +195,123 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
                     details,
                     interactions,
                     Container(
-                      child: Card(
-                        child: Column(
+                      color: Color.fromARGB(1, 197, 73, 73),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        // skjfsdjhkfdsjkhdfsjkldsfjlksdflijfse
+                        child: Stack(
                           children: [
-                            Container(
-                              height: 50,
-                              width: 200,
-                              // ignore: prefer_const_constructors
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  // ignore: prefer_const_constructors
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      // ignore: prefer_const_literals_to_create_immutables
-                                      colors: [
-                                        // ignore: prefer_const_constructors
-                                        Color.fromARGB(255, 255, 110, 14),
-                                        // ignore: prefer_const_constructors
-                                        Color.fromARGB(255, 253, 206, 111)
-                                      ])),
-                              // ignore: prefer_const_constructors
-                              child: Center(
-                                // ignore: prefer_const_constructors
-                                child: Text(" ----Comment section---- "),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 35, 10, 0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(255, 193, 193, 193)
+                                          .withOpacity(
+                                              0.5), // Adjust the shadow color as needed
+                                      spreadRadius:
+                                          5, // Adjust the spread radius as needed
+                                      blurRadius:
+                                          7, // Adjust the blur radius as needed
+                                      offset: Offset(0,
+                                          3), // Adjust the offset values as needed
+                                    ),
+                                  ],
+                                  // Adjust the radius as needed
+                                ),
+                                child: Column(
+                                  children: [
+                                    for (ForumQuestionComment comment
+                                        in comments)
+                                      ListTile(
+                                        leading: const Icon(Icons.person),
+                                        title: Text(
+                                          comment.user_detail.getFullName() ??
+                                              "Anonymous",
+                                        ),
+                                        subtitle: Text(comment.text),
+                                      ),
+                                  ],
+                                ),
                               ),
                             ),
-                            Column(
-                              children: [
-                                for (ForumQuestionComment comment in comments)
-                                  ListTile(
-                                    leading: const Icon(Icons.person),
-                                    title: Text(
-                                        comment.user_detail.getFullName() ??
-                                            "Anonymous"),
-                                    subtitle: Text(comment.text),
-                                  )
-                              ],
+                            Align(
+                              alignment: Alignment.topCenter,
+                              child: Container(
+                                // ignore: prefer_const_constructors
+                                margin: EdgeInsets.only(top: 0),
+                                child: Container(
+                                  width: 200,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                      color: Colors.orange,
+                                      borderRadius: BorderRadius.circular(20.0),
+
+                                      // ignore: prefer_const_constructors
+                                      gradient: LinearGradient(
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                          // ignore: prefer_const_literals_to_create_immutables
+                                          colors: [
+                                            // ignore: prefer_const_constructors
+                                            Color.fromARGB(255, 255, 110, 14),
+                                            // ignore: prefer_const_constructors
+                                            Color.fromARGB(255, 252, 213, 134)
+                                          ])),
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      // ignore: prefer_const_literals_to_create_immutables
+                                      children: [
+                                        // ignore: prefer_const_constructors
+                                        Text(
+                                          " --- Comment section --- ",
+                                          // ignore: prefer_const_constructors
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
-                            Form(
-                              key: _formKey,
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+                      child: Container(
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          child: Form(
+                            key: _formKey,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                    10), // Adjust the radius as needed
+                                border: Border.all(
+                                  color: Colors
+                                      .grey, // Adjust the border color as needed
+                                  width:
+                                      1.0, // Adjust the border width as needed
+                                ),
+                              ),
                               child: TextFormField(
                                 controller: _comment,
                                 decoration: const InputDecoration(
+                                  contentPadding: EdgeInsets.all(
+                                      15), // Adjust the padding as needed
                                   suffixIcon: IconButton(
                                     icon: Icon(Icons.send),
                                     onPressed: null,
                                   ),
+                                  border: InputBorder
+                                      .none, // Remove the default border
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -246,11 +320,9 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
                                   return null;
                                 },
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
+                            ),
+                          )),
+                    ),
                   ],
                 ),
               ),
