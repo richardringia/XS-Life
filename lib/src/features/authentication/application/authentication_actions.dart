@@ -33,10 +33,7 @@ class AuthenticationActions {
           user.updateDisplayName(user.email!.split('@')[0]);
         }
 
-        // step 3: check if the data model is created in the collection
-        // userRepo.checkLoggedInUser(user);
-
-        // step 4: check if firstname and lastname are not null
+        // step 3: check if firstname and lastname are not null
         userRepo.isUserEmpty(user).then((value) => {
               if (value)
                 {

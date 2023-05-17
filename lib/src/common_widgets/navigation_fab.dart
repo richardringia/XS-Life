@@ -31,7 +31,7 @@ class NavigationFab extends StatelessWidget {
                 () {
                   context.replace('/$location');
                 },
-            backgroundColor: Color.fromRGBO(255, 175, 54, 1),
+            backgroundColor: const Color.fromRGBO(255, 175, 54, 1),
             child: image,
           ),
         ),

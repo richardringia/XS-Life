@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xs_life/src/constants/page_constants.dart';
+import 'package:xs_life/src/features/authentication/data/auth_service.dart';
 import 'package:xs_life/src/features/forum/data/forum_category.dart';
 import 'package:xs_life/src/features/forum/data/forum_repository.dart';
 import 'package:xs_life/src/features/forum/domain/forum_question.dart';
@@ -54,18 +55,18 @@ class ForumQuestionCard extends StatelessWidget {
               child: ButtonBar(
                 alignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.favorite),
-                        color: forumQuestion.hasUserLiked()
-                            ? Colors.pink
-                            : Colors.grey,
-                        onPressed: () {
-                          forumRepository.likeQuestion(forumQuestion.key);
-                        },
-                      ),
-                    ],
+                  IconButton(
+                    icon: const Icon(Icons.favorite),
+                    color: forumQuestion.hasUserLiked()
+                        ? Colors.pink
+                        : Colors.grey,
+                    onPressed: () {
+                      AuthService.authCheck(context).then((value) => {
+                        if (value) {
+                          forumRepository.likeQuestion(forumQuestion.key)
+                        }
+                      });
+                    },
                   ),
                   Text("${forumQuestion.getTotalLikes()} likes")
                 ],
