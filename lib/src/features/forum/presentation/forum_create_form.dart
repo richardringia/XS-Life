@@ -25,6 +25,7 @@ class ForumCreateFormState extends State<ForumCreateForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         actions: [
           Image.asset(
