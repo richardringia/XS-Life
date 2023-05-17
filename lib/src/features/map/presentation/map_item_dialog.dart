@@ -10,6 +10,9 @@ class MapItemDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
       title: Text(mapItem.name),
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -18,16 +21,20 @@ class MapItemDialog extends StatelessWidget {
         ],
       ),
       actions: [
-        TextButton(
-          onPressed: () {
-            MapUtils.openMap(mapItem.lat, mapItem.long);
-          },
-          child: const Text('Navigate'),
+        Column(
+          children: [
+            TextButton(
+              onPressed: () {
+                MapUtils.openMap(mapItem.lat, mapItem.long);
+              },
+              child: const Text('Navigate'),
+            ),
+          ],
         ),
         TextButton(
           onPressed: () {
             Navigator.pop(context);
-            },
+          },
           child: const Text('Dismiss'),
         ),
       ],
