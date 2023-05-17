@@ -5,7 +5,8 @@ import 'package:xs_life/src/features/authentication/data/user_repository.dart';
 import 'package:xs_life/src/features/authentication/domain/user_detail.dart';
 
 class ProfileEditScreenWidget extends StatefulWidget {
-  const ProfileEditScreenWidget({super.key, this.userDetail, required this.isLoading});
+  const ProfileEditScreenWidget(
+      {super.key, this.userDetail, required this.isLoading});
 
   final UserDetail? userDetail;
   final bool isLoading;
@@ -93,6 +94,7 @@ class _ProfileEditScreenWidgetState extends State<ProfileEditScreenWidget> {
                     }
                     return null;
                   }),
+              // ignore: prefer_const_constructors
               SizedBox(height: 20.0),
               Center(
                 child: ElevatedButton(
@@ -104,9 +106,7 @@ class _ProfileEditScreenWidgetState extends State<ProfileEditScreenWidget> {
                         userDetail.firstname = _firstName.text;
                         userDetail.lastname = _lastName.text;
                         userRepo.updateUser(userDetail);
-                      } else {
-
-                      }
+                      } else {}
                     }
                   },
                   child: Text('Submit'),
@@ -115,7 +115,9 @@ class _ProfileEditScreenWidgetState extends State<ProfileEditScreenWidget> {
               Center(
                 child: ElevatedButton(
                   onPressed: () async {
-                    FirebaseAuth.instance.signOut().then((value) => Navigator.pop(context));
+                    FirebaseAuth.instance
+                        .signOut()
+                        .then((value) => Navigator.pop(context));
                   },
                   child: Text('Sign out'),
                 ),

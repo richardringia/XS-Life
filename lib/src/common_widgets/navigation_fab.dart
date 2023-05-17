@@ -11,21 +11,18 @@ class NavigationFab extends StatelessWidget {
   });
 
   final String location;
-  final Image image ;
+  final Image image;
   final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        
           borderRadius: BorderRadius.circular(10),
           color: Color.fromARGB(1, 1, 1, 1)),
-          
       child: Visibility(
         visible: !(ModalRoute.of(context)?.settings.name == location),
         child: Container(
-        
           margin: const EdgeInsets.all(10),
           // icon
           child: FloatingActionButton(
