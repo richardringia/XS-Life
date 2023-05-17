@@ -32,7 +32,6 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
     var details = Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        // height: 200,
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
         alignment: Alignment.topLeft,
         child: Column(
