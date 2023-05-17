@@ -144,7 +144,8 @@ class ForumCreateFormState extends State<ForumCreateForm> {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(8, 100, 8, 0),
                               child: Container(
-                                  color: const Color.fromARGB(255, 255, 255, 255),
+                                  color:
+                                      const Color.fromARGB(255, 255, 255, 255),
                                   // Textformfield
                                   child: TextFormField(
                                     textAlign: TextAlign.center,
@@ -175,7 +176,7 @@ class ForumCreateFormState extends State<ForumCreateForm> {
                             ),
                             //  end section 1
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(8, 20, 8, 100),
+                              padding: const EdgeInsets.fromLTRB(9, 21, 8, 100),
                               child: OutlinedButton(
                                   onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
@@ -210,11 +211,11 @@ class ForumCreateFormState extends State<ForumCreateForm> {
                                   style: ButtonStyle(
                                     backgroundColor:
                                         MaterialStateProperty.all<Color>(
-                                            const Color.fromARGB(255, 251, 166, 38)),
+                                            const Color.fromARGB(
+                                                255, 251, 166, 38)),
                                   ),
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: const [
                                       Text(
                                         'POST',
