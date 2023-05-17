@@ -71,7 +71,7 @@ class _ProfileEditScreenWidgetState extends State<ProfileEditScreenWidget> {
                       ),
                     ),
                     Positioned(
-                      top: 10,
+                      top: 15,
                       left: 1,
                       child: GestureDetector(
                         onTap: () {
