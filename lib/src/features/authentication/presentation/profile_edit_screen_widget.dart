@@ -24,7 +24,7 @@ class _ProfileEditScreenWidgetState extends State<ProfileEditScreenWidget> {
   @override
   Widget build(BuildContext context) {
     if (widget.isLoading) {
-      return Scaffold(body: LoadingScreenWidget());
+      return const Scaffold(body: LoadingScreenWidget());
     }
 
     if (_firstName.text.isEmpty) {
@@ -44,20 +44,15 @@ class _ProfileEditScreenWidgetState extends State<ProfileEditScreenWidget> {
           ),
         ],
         toolbarHeight: 100,
-        // ignore: prefer_const_constructors
-        backgroundColor: Color.fromARGB(255, 255, 110, 14),
+        backgroundColor: const Color.fromARGB(255, 255, 110, 14),
         flexibleSpace: Container(
-          // ignore: prefer_const_constructors
-          decoration: BoxDecoration(
-              // ignore: prefer_const_constructors
+          decoration: const BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   // ignore: prefer_const_literals_to_create_immutables
                   colors: [
-                // ignore: prefer_const_constructors
                 Color.fromARGB(255, 255, 110, 14),
-                // ignore: prefer_const_constructors
                 Color.fromARGB(255, 252, 213, 134)
               ])),
         ),
@@ -94,33 +89,33 @@ class _ProfileEditScreenWidgetState extends State<ProfileEditScreenWidget> {
                     }
                     return null;
                   }),
-              // ignore: prefer_const_constructors
-              SizedBox(height: 20.0),
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      UserRepository userRepo = UserRepository();
-                      UserDetail? userDetail = widget.userDetail;
-                      if (userDetail != null) {
-                        userDetail.firstname = _firstName.text;
-                        userDetail.lastname = _lastName.text;
-                        userRepo.updateUser(userDetail);
-                      } else {}
-                    }
-                  },
-                  child: Text('Submit'),
-                ),
-              ),
-              Center(
-                child: ElevatedButton(
-                  onPressed: () async {
-                    FirebaseAuth.instance
-                        .signOut()
-                        .then((value) => Navigator.pop(context));
-                  },
-                  child: Text('Sign out'),
-                ),
+              const SizedBox(height: 20.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  FilledButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        UserRepository userRepo = UserRepository();
+                        UserDetail? userDetail = widget.userDetail;
+                        if (userDetail != null) {
+                          userDetail.firstname = _firstName.text;
+                          userDetail.lastname = _lastName.text;
+                          userRepo.updateUser(userDetail);
+                        } else {}
+                      }
+                    },
+                    child: const Text('Save'),
+                  ),
+                  FilledButton(
+                    onPressed: () async {
+                      FirebaseAuth.instance
+                          .signOut()
+                          .then((value) => Navigator.pop(context));
+                    },
+                    child: const Text('Sign out'),
+                  ),
+                ],
               ),
             ],
           ),

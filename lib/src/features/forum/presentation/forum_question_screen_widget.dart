@@ -49,7 +49,6 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
           height: 50,
           width: 300,
           decoration: BoxDecoration(
-            // ignore: prefer_const_constructors
             color: Color.fromARGB(255, 255, 255, 255),
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
@@ -57,7 +56,6 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
                 color: Colors.black.withOpacity(0.2),
                 spreadRadius: 2,
                 blurRadius: 4,
-                // ignore: prefer_const_constructors
                 offset: Offset(0, 2),
               ),
             ],
@@ -77,12 +75,9 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
                   ],
                 ),
               ),
-              // ignore: prefer_const_constructors
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                // ignore: prefer_const_constructors
                 child: VerticalDivider(
-                  // ignore: prefer_const_constructors
                   color: Color.fromARGB(255, 221, 221, 221),
                   thickness: 3,
                   width: 10,
@@ -100,12 +95,9 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
                   Text("${comments.length} comments")
                 ],
               ),
-              // ignore: prefer_const_constructors
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                // ignore: prefer_const_constructors
                 child: VerticalDivider(
-                  // ignore: prefer_const_constructors
                   color: Color.fromARGB(255, 209, 209, 209),
                   thickness: 3,
                   width: 10,
@@ -136,20 +128,14 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
           ),
         ],
         toolbarHeight: 100,
-        // ignore: prefer_const_constructors
         backgroundColor: Color.fromARGB(255, 255, 110, 14),
         flexibleSpace: Container(
-          // ignore: prefer_const_constructors
           decoration: BoxDecoration(
-              // ignore: prefer_const_constructors
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  // ignore: prefer_const_literals_to_create_immutables
                   colors: [
-                // ignore: prefer_const_constructors
                 Color.fromARGB(255, 255, 110, 14),
-                // ignore: prefer_const_constructors
                 Color.fromARGB(255, 252, 213, 134)
               ])),
         ),
@@ -188,14 +174,14 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
                                       borderRadius: BorderRadius.circular(10),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Color.fromARGB(
-                                                  255, 193, 193, 193)
-                                              .withOpacity(
-                                                  0.5), // Adjust the shadow color as needed
-                                          spreadRadius:
-                                              5, // Adjust the spread radius as needed
-                                          blurRadius:
-                                              7, // Adjust the blur radius as needed
+                                          color:
+                                              Color.fromARGB(255, 193, 193, 193)
+                                                  .withOpacity(0.5),
+                                          // Adjust the shadow color as needed
+                                          spreadRadius: 5,
+                                          // Adjust the spread radius as needed
+                                          blurRadius: 7,
+                                          // Adjust the blur radius as needed
                                           offset: Offset(0,
                                               3), // Adjust the offset values as needed
                                         ),
@@ -237,8 +223,10 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
                                               begin: Alignment.topCenter,
                                               end: Alignment.bottomCenter,
                                               colors: const [
-                                                Color.fromARGB(255, 255, 110, 14),
-                                                Color.fromARGB(255, 252, 213, 134)
+                                                Color.fromARGB(
+                                                    255, 255, 110, 14),
+                                                Color.fromARGB(
+                                                    255, 252, 213, 134)
                                               ])),
                                       child: Center(
                                         child: Column(

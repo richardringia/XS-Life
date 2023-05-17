@@ -95,7 +95,7 @@ class MapScreenWidgetState extends State<MapScreenWidget> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 255, 243, 243),
+                  color: const Color.fromARGB(255, 255, 243, 243),
                   borderRadius: BorderRadius.circular(17),
                 ),
                 margin: const EdgeInsets.all(30),
@@ -149,35 +149,27 @@ class MapScreenWidgetState extends State<MapScreenWidget> {
                     Align(
                       alignment: Alignment.topCenter,
                       child: Container(
-                        // ignore: prefer_const_constructors
-                        margin: EdgeInsets.only(top: 0),
+                        margin: const EdgeInsets.only(top: 0),
                         child: Container(
                           width: 200,
                           height: 50,
                           decoration: BoxDecoration(
                               color: Colors.orange,
                               borderRadius: BorderRadius.circular(20.0),
-                              // ignore: prefer_const_constructors
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
-                                  // ignore: prefer_const_literals_to_create_immutables
                                   colors: [
-                                    // ignore: prefer_const_constructors
                                     Color.fromARGB(255, 255, 110, 14),
-                                    // ignore: prefer_const_constructors
                                     Color.fromARGB(255, 252, 213, 134)
                                   ])),
                           child: Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              // ignore: prefer_const_literals_to_create_immutables
-                              children: [
-                                // ignore: prefer_const_constructors
+                              children: const [
                                 Text(
                                   'KMUTT MAP',
-                                  // ignore: prefer_const_constructors
                                   style: TextStyle(fontSize: 24.0),
                                 ),
                               ],

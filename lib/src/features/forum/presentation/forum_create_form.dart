@@ -34,21 +34,15 @@ class ForumCreateFormState extends State<ForumCreateForm> {
           ),
         ],
         toolbarHeight: 100,
-        // ignore: prefer_const_constructors
-        backgroundColor: Color.fromARGB(255, 255, 110, 14),
+        backgroundColor: const Color.fromARGB(255, 255, 110, 14),
         flexibleSpace: Container(
-          // ignore: prefer_const_constructors
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              // ignore: prefer_const_constructors
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  // ignore: prefer_const_literals_to_create_immutables
                   colors: [
-                    // ignore: prefer_const_constructors
                     Color.fromARGB(255, 255, 110, 14),
-                    // ignore: prefer_const_constructors
                     Color.fromARGB(255, 252, 213, 134)
                   ])),
         ),
@@ -56,8 +50,7 @@ class ForumCreateFormState extends State<ForumCreateForm> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-          // ignore: prefer_const_constructors
-          color: Color.fromARGB(0, 169, 169, 169),
+          color: const Color.fromARGB(0, 169, 169, 169),
           child: Form(
             key: _formKey,
             child: Column(
@@ -69,7 +62,7 @@ class ForumCreateFormState extends State<ForumCreateForm> {
                         padding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 255, 255, 255),
+                            color: const Color.fromARGB(255, 255, 255, 255),
                             borderRadius: BorderRadius.circular(17),
                             boxShadow: [
                               BoxShadow(
@@ -85,12 +78,13 @@ class ForumCreateFormState extends State<ForumCreateForm> {
                             children: ForumCategory.values
                                 .map(
                                   (category) => Container(
-                                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 0, 10, 0),
                                     child: FilterChip(
-                                      selectedColor:
-                                          Color.fromARGB(255, 255, 159, 14),
-                                      backgroundColor:
-                                          Color.fromARGB(248, 253, 211, 121),
+                                      selectedColor: const Color.fromARGB(
+                                          255, 255, 159, 14),
+                                      backgroundColor: const Color.fromARGB(
+                                          248, 253, 211, 121),
                                       label: Text(
                                         ForumCategoryHelper.getViewName(
                                             category),
@@ -121,7 +115,7 @@ class ForumCreateFormState extends State<ForumCreateForm> {
                   padding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: const Color.fromARGB(255, 255, 255, 255),
                       borderRadius: BorderRadius.circular(17),
                       boxShadow: [
                         BoxShadow(
@@ -129,8 +123,8 @@ class ForumCreateFormState extends State<ForumCreateForm> {
                               0.5), // Adjust the shadow color as needed
                           spreadRadius: 5, // Adjust the spread radius as needed
                           blurRadius: 7, // Adjust the blur radius as needed
-                          // ignore: prefer_const_constructors
-                          offset: Offset(
+
+                          offset: const Offset(
                               0, 3), // Adjust the offset values as needed
                         ),
                       ],
@@ -139,17 +133,17 @@ class ForumCreateFormState extends State<ForumCreateForm> {
                       padding: const EdgeInsets.all(20),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 255, 253, 253),
+                          color: const Color.fromARGB(255, 255, 253, 253),
                           borderRadius: BorderRadius.circular(17),
                         ),
                         child: Column(
-                          // lookink array from here
+                          // looking array from here
                           children: [
                             // section 1
                             Padding(
                               padding: const EdgeInsets.fromLTRB(8, 100, 8, 0),
                               child: Container(
-                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  color: const Color.fromARGB(255, 255, 255, 255),
                                   // Textformfield
                                   child: TextFormField(
                                     textAlign: TextAlign.center,
@@ -178,7 +172,6 @@ class ForumCreateFormState extends State<ForumCreateForm> {
                                     },
                                   )),
                             ),
-
                             //  end section 1
                             Padding(
                               padding: const EdgeInsets.fromLTRB(8, 20, 8, 100),
@@ -216,19 +209,17 @@ class ForumCreateFormState extends State<ForumCreateForm> {
                                   style: ButtonStyle(
                                     backgroundColor:
                                         MaterialStateProperty.all<Color>(
-                                            Color.fromARGB(255, 251, 166, 38)),
+                                            const Color.fromARGB(255, 251, 166, 38)),
                                   ),
-                                  child: Container(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: const [
-                                        Text(
-                                          'POST',
-                                          style: TextStyle(color: Colors.black),
-                                        ),
-                                      ],
-                                    ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.center,
+                                    children: const [
+                                      Text(
+                                        'POST',
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                    ],
                                   )),
                             ),
                           ],
