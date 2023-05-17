@@ -115,6 +115,7 @@ class ForumCreateFormState extends State<ForumCreateForm> {
                     decoration: BoxDecoration(
                       color: Color.fromARGB(255, 255, 243, 216),
                       borderRadius: BorderRadius.circular(17),
+                      
                     ),
                     child: Column(
                       // lookink array from here

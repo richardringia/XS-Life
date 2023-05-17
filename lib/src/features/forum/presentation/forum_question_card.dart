@@ -7,7 +7,10 @@ import 'package:xs_life/src/features/forum/domain/forum_question.dart';
 class ForumQuestionCard extends StatelessWidget {
   final ForumQuestion forumQuestion;
 
-  const ForumQuestionCard({Key? key, required this.forumQuestion}) : super(key: key);
+  const ForumQuestionCard({
+    Key? key,
+    required this.forumQuestion,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
