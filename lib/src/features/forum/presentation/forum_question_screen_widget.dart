@@ -89,8 +89,8 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
                 child: Column(
                   children: const [
                     Icon(
-                      Icons.thumb_up,
-                      color: Color.fromARGB(255, 39, 138, 252),
+                      Icons.favorite,
+                      color: Colors.pink,
                     ),
                     Text("999 likes")
                   ],

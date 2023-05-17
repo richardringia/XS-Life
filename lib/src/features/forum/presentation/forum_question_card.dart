@@ -38,13 +38,14 @@ class ForumQuestionCard extends StatelessWidget {
               alignment: MainAxisAlignment.start,
               children: [
                 IconButton(
-                  icon: const Icon(Icons.thumb_up),
+                  icon: const Icon(Icons.favorite),
+                  color: Colors.pink,
                   onPressed: () {
                     forumRepository.likeQuestion(forumQuestion.key);
                   },
                 ),
                 IconButton(
-                  icon: const Icon(Icons.comment),
+                  icon: const Icon(Icons.comment_outlined),
                   onPressed: () {
                     context.push('/${PageConstants.forum}/edit/${forumQuestion.key}');
                   },
@@ -57,3 +58,4 @@ class ForumQuestionCard extends StatelessWidget {
     );
   }
 }
+ 
