@@ -10,6 +10,9 @@ class MapItemDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
       title: Text(mapItem.name),
       content: Column(
         mainAxisSize: MainAxisSize.min,
