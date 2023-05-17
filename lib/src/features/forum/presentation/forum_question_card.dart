@@ -24,7 +24,7 @@ class ForumQuestionCard extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ListTile( 
+          ListTile(
             leading: const Icon(Icons.person),
             title: Text(forumQuestion.userDetail!.getFullName() ?? "Anonymous"),
           ),
@@ -35,21 +35,29 @@ class ForumQuestionCard extends StatelessWidget {
           ),
           ButtonTheme(
             child: ButtonBar(
-              alignment: MainAxisAlignment.start,
+              alignment: MainAxisAlignment.spaceBetween,
               children: [
-                IconButton(
-                  icon: const Icon(Icons.favorite),
-                  color: Colors.pink,
-                  onPressed: () {
-                    forumRepository.likeQuestion(forumQuestion.key);
-                  },
+                Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.favorite),
+                      color: forumQuestion.hasUserLiked()
+                          ? Colors.pink
+                          : Colors.grey,
+                      onPressed: () {
+                        forumRepository.likeQuestion(forumQuestion.key);
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.comment_outlined),
+                      onPressed: () {
+                        context.push(
+                            '/${PageConstants.forum}/edit/${forumQuestion.key}');
+                      },
+                    ),
+                  ],
                 ),
-                IconButton(
-                  icon: const Icon(Icons.comment_outlined),
-                  onPressed: () {
-                    context.push('/${PageConstants.forum}/edit/${forumQuestion.key}');
-                  },
-                ),
+                Text("${forumQuestion.getTotalLikes()} likes")
               ],
             ),
           ),
@@ -58,4 +66,3 @@ class ForumQuestionCard extends StatelessWidget {
     );
   }
 }
- 

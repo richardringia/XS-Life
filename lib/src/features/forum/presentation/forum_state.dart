@@ -41,6 +41,9 @@ class ForumState extends ChangeNotifier {
                 key: document.id,
                 category: document.data()['category'] as String,
                 question: document.data()['question'] as String,
+                votes: document.data()['votes'] != null
+                    ? document.data()['votes'] as List<dynamic>
+                    : [],
                 userDetail: userDetail),
           );
         }

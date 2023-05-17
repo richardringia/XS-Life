@@ -27,7 +27,6 @@ void _onFabPressed() {
 }
 
 class _ForumScreenWidgetState extends State<ForumScreenWidget> {
-  ScrollController _scrollController = ScrollController();
   List<ForumCategory> selectedCategories = [];
 
   @override

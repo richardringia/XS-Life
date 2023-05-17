@@ -41,6 +41,7 @@ class ForumQuestionState extends ChangeNotifier {
           category: questionResult.data()?['category'] as String,
           question: questionResult.data()?['question'] as String,
           key: questionResult.id,
+          votes: [],
           userDetail: userDetail,
         );
 

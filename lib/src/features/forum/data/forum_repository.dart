@@ -40,26 +40,8 @@ class ForumRepository extends IForumRepository {
         .doc(key)
         .get()
         .then((DocumentSnapshot documentSnapshot) async {
-      if (documentSnapshot.exists) {
-        print('Document exists on the database');
-      } else {
-        print('Document does not exist on the database');
-      }
-
-      print(documentSnapshot.data());
-
       return Forum.fromMap(documentSnapshot.data() as dynamic);
     });
-    // .then(
-    //       (value) => Forum(
-    //         views: value.get('views'),
-    //         category: value.get('category'),
-    //         question: value.get('question'),
-    //         topic: value.get('topic'),
-    //         user_key: value.get('user_key'),
-    //         created_at: value.get('created_at'),
-    //       ),
-    //     );
   }
 
   @override

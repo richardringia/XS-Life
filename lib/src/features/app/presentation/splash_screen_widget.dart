@@ -17,8 +17,8 @@ class SplashScreenWidgetState extends State<SplashScreenWidget> {
   startTime() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // For testing, set the firstTime to false, like "bool? firstTime = false"
-    // bool? firstTime = prefs.getBool('first_time');
-    bool? firstTime = false;
+    bool? firstTime = prefs.getBool('first_time');
+    // bool? firstTime = false;
 
     const duration = Duration(seconds: 1);
 

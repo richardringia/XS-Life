@@ -1,5 +1,3 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:xs_life/src/constants/collection_constants.dart';
 import 'package:xs_life/src/features/map/data/map_repository_interface.dart';
@@ -15,7 +13,6 @@ class MapRepository extends IMapRepository {
 
   @override
   Future<List<MapCategory>> getCategories() async {
-    await checkAuth();
     List<MapCategory> categories = [];
     var mapCategoryDoc = await mapCategoryCollection.get();
 
@@ -46,7 +43,6 @@ class MapRepository extends IMapRepository {
 
   @override
   Future<List<MapItem>> getMapItems(List<MapCategory> categories) async {
-    await checkAuth();
     List<MapItem> mapItems = [];
     var mapDoc = await mapCollection.get();
 
