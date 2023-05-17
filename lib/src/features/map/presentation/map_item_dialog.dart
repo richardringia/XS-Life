@@ -18,17 +18,23 @@ class MapItemDialog extends StatelessWidget {
         ],
       ),
       actions: [
-        TextButton(
-          onPressed: () {
-            MapUtils.openMap(mapItem.lat, mapItem.long);
-          },
-          child: const Text('Navigate'),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.pop(context);
-            },
-          child: const Text('Dismiss'),
+        Row(
+          children: [
+            const SizedBox(width: 90), // Adjust the width as needed for spacing
+            TextButton(
+              onPressed: () {
+                MapUtils.openMap(mapItem.lat, mapItem.long);
+              },
+              child: const Text('Navigate'),
+            ),
+            const SizedBox(width: 10), // Adjust the width as needed for spacing
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Dismiss'),
+            ),
+          ],
         ),
       ],
     );
