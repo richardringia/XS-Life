@@ -7,17 +7,21 @@ import 'package:xs_life/src/features/forum/domain/forum_question.dart';
 class ForumQuestionCard extends StatelessWidget {
   final ForumQuestion forumQuestion;
 
-  const ForumQuestionCard({super.key, required this.forumQuestion});
+  const ForumQuestionCard({Key? key, required this.forumQuestion}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     ForumRepository forumRepository = ForumRepository();
 
     return Card(
+      elevation: 2, // Adjust the elevation value to control the shadow depth
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ListTile(
+          ListTile( 
             leading: const Icon(Icons.person),
             title: Text(forumQuestion.userDetail!.getFullName() ?? "Anonymous"),
           ),
@@ -39,13 +43,12 @@ class ForumQuestionCard extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.comment),
                   onPressed: () {
-                    context.push(
-                        '/${PageConstants.forum}/edit/${forumQuestion.key}');
+                    context.push('/${PageConstants.forum}/edit/${forumQuestion.key}');
                   },
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
