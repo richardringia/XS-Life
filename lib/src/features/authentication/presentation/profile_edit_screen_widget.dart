@@ -156,41 +156,50 @@ class _ProfileEditScreenWidgetState extends State<ProfileEditScreenWidget> {
                           ),
                         ),
                         const SizedBox(height: 20.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            FilledButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  UserRepository userRepo = UserRepository();
-                                  UserDetail? userDetail = widget.userDetail;
-                                  if (userDetail != null) {
-                                    userDetail.firstname = _firstName.text;
-                                    userDetail.lastname = _lastName.text;
-                                    userRepo.updateUser(userDetail);
-                                  } else {
-                                    userRepo.checkLoggedInUser(
-                                        _firstName.text, _lastName.text);
-                                  }
+                        Center(
+                          child: Column(
+                            children: [
+                              Container(
+                                width: 300,
+                                child: FilledButton(
+                                  onPressed: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      UserRepository userRepo =
+                                          UserRepository();
+                                      UserDetail? userDetail =
+                                          widget.userDetail;
+                                      if (userDetail != null) {
+                                        userDetail.firstname = _firstName.text;
+                                        userDetail.lastname = _lastName.text;
+                                        userRepo.updateUser(userDetail);
+                                      } else {
+                                        userRepo.checkLoggedInUser(
+                                            _firstName.text, _lastName.text);
+                                      }
 
-                                  const snackBar = SnackBar(
-                                    content: Text('User details saved'),
-                                  );
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar);
-                                }
-                              },
-                              child: const Text('Save'),
-                            ),
-                            FilledButton(
-                              onPressed: () async {
-                                FirebaseAuth.instance.signOut().then(
-                                      (value) => Navigator.pop(context),
-                                    );
-                              },
-                              child: const Text('Sign out'),
-                            ),
-                          ],
+                                      const snackBar = SnackBar(
+                                        content: Text('User details saved'),
+                                      );
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                    }
+                                  },
+                                  child: const Text('Save'),
+                                ),
+                              ),
+                              Container(
+                                width: 300,
+                                child: FilledButton(
+                                  onPressed: () async {
+                                    FirebaseAuth.instance.signOut().then(
+                                          (value) => Navigator.pop(context),
+                                        );
+                                  },
+                                  child: const Text('Sign out'),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
