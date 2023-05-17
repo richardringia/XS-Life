@@ -27,11 +27,13 @@ class _ProfileEditScreenWidgetState extends State<ProfileEditScreenWidget> {
       return const Scaffold(body: LoadingScreenWidget());
     }
 
-    if (_firstName.text.isEmpty) {
-      _firstName.text = widget.userDetail!.firstname;
-    }
-    if (_lastName.text.isEmpty) {
-      _lastName.text = widget.userDetail!.lastname;
+    if (widget.userDetail != null) {
+      if (_firstName.text.isEmpty) {
+        _firstName.text = widget.userDetail!.firstname;
+      }
+      if (_lastName.text.isEmpty) {
+        _lastName.text = widget.userDetail!.lastname;
+      }
     }
 
     return Scaffold(
@@ -102,7 +104,14 @@ class _ProfileEditScreenWidgetState extends State<ProfileEditScreenWidget> {
                           userDetail.firstname = _firstName.text;
                           userDetail.lastname = _lastName.text;
                           userRepo.updateUser(userDetail);
-                        } else {}
+                        } else {
+                          userRepo.checkLoggedInUser(
+                              _firstName.text, _lastName.text);
+                        }
+
+                        const snackBar =
+                            SnackBar(content: Text('User details saved'));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
                     },
                     child: const Text('Save'),

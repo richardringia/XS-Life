@@ -34,15 +34,7 @@ class AuthenticationActions {
         }
 
         // step 3: check if the data model is created in the collection
-        userRepo.checkLoggedInUser(user);
-
-        if (!user.emailVerified) {
-          user.sendEmailVerification();
-          const snackBar = SnackBar(
-              content:
-                  Text('Please check your email to verify your email address'));
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        }
+        // userRepo.checkLoggedInUser(user);
 
         // step 4: check if firstname and lastname are not null
         userRepo.isUserEmpty(user).then((value) => {

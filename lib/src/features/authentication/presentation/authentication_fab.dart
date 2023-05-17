@@ -17,20 +17,17 @@ class AuthenticationFab extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: avoid_unnecessary_containers
     return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Visibility(
-            visible: !loggedIn,
-            child: NavigationFab(
-              location: PageConstants.signIn,
-              
-              onPressed: () {
-                !loggedIn
-                    ? context.push('/${PageConstants.signIn}')
-                    : signOut();
-              }, image:  Image.asset('assets/images/authentification.png'),
-            )),
-      ),
+      child: Visibility(
+          visible: !loggedIn,
+          child: NavigationFab(
+            location: PageConstants.signIn,
+
+            onPressed: () {
+              !loggedIn
+                  ? context.push('/${PageConstants.signIn}')
+                  : signOut();
+            }, image:  Image.asset('assets/images/authentification.png'),
+          )),
     );
   }
 }

@@ -1,14 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:xs_life/src/features/authentication/data/auth_service.dart';
 import 'package:xs_life/src/features/authentication/data/user_repository_interface.dart';
 import 'package:xs_life/src/features/authentication/domain/user_detail.dart';
 
 class UserRepository extends IUserRepository {
   @override
-  Future<void> checkLoggedInUser(User user) async {
-    var userDoc = await collection.where("user_key", isEqualTo: user.uid).get();
+  Future<void> checkLoggedInUser(String firstname, String lastname) async {
+    var userDoc = await collection
+        .where("user_key", isEqualTo: AuthService.getUid())
+        .get();
     if (userDoc.size < 1) {
-      UserDetail userDetail = UserDetail(user.uid, user.displayName.toString(),
-          user.displayName.toString(), "");
+      UserDetail userDetail = UserDetail(AuthService.getUid(), firstname,
+          lastname, "");
       await createUser(userDetail);
     }
   }
@@ -35,7 +38,8 @@ class UserRepository extends IUserRepository {
 
   @override
   Future<void> updateUser(UserDetail userDetail) async {
-    var userDoc = await collection.where("user_key", isEqualTo: userDetail.uid).get();
+    var userDoc =
+        await collection.where("user_key", isEqualTo: userDetail.uid).get();
     if (userDoc.size > 0) {
       userDoc.docs[0].reference.update(userDetail.toMap());
     }
