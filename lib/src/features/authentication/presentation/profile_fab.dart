@@ -17,10 +17,10 @@ class ProfileFab extends StatelessWidget {
       visible: loggedIn,
       child: NavigationFab(
         location: PageConstants.profile,
-        icon: const Icon(Icons.person),
+        image: Image.asset('assets/images/profile.png'),
         onPressed: () {
           context.push('/${PageConstants.profile}');
-        },
+        }, 
       ),
     );
   }

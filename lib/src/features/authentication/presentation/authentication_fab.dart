@@ -23,12 +23,12 @@ class AuthenticationFab extends StatelessWidget {
             visible: !loggedIn,
             child: NavigationFab(
               location: PageConstants.signIn,
-              icon: const Icon(Icons.key),
+              
               onPressed: () {
                 !loggedIn
                     ? context.push('/${PageConstants.signIn}')
                     : signOut();
-              },
+              }, image:  Image.asset('assets/images/authentification.png'),
             )),
       ),
     );

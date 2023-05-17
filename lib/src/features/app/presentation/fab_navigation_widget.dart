@@ -23,7 +23,7 @@ class FabNavigationWidget extends StatelessWidget {
                 FirebaseAuth.instance.signOut();
               }),
           ProfileFab(loggedIn: appState.loggedIn),
-          const NavigationFab(location: PageConstants.map, icon: Icon(Icons.map)),
+          NavigationFab(location: PageConstants.map, image: Image.asset('assets/images/map.png'),),
           const ForumFab(),
         ],
       ),

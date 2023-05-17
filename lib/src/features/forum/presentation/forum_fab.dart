@@ -10,9 +10,9 @@ class ForumFab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const NavigationFab(
-      location: PageConstants.forum,
-      icon: Icon(Icons.groups),
+    return  NavigationFab(
+      location: PageConstants.forum, image: Image.asset('assets/images/forum.png'),
+
     );
   }
 }

@@ -7,14 +7,16 @@ import 'package:xs_life/src/features/forum/domain/forum_question.dart';
 class ForumQuestionCard extends StatelessWidget {
   final ForumQuestion forumQuestion;
 
-  const ForumQuestionCard({super.key, required this.forumQuestion});
+  const ForumQuestionCard({
+    Key? key,
+    required this.forumQuestion,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     ForumRepository forumRepository = ForumRepository();
 
     return Card(
-      shadowColor: Color.fromARGB(255, 86, 86, 86),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
