@@ -26,7 +26,7 @@ class MapItemDialog extends StatelessWidget {
             const SizedBox(width: 90), // Adjust the width as needed for spacing
             TextButton(
               onPressed: () {
-                MapUtils.openMap(mapItem.lat, mapItem.long);
+                MapUtils.openMap(context, mapItem.name, mapItem.lat, mapItem.long);
               },
               child: const Text('Navigate'),
             ),

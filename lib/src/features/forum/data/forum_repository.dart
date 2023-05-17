@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:xs_life/src/constants/collection_constants.dart';
-import 'package:xs_life/src/constants/entities/Forum.dart';
 import 'package:xs_life/src/features/forum/data/forum_repository_interface.dart';
 
 class ForumRepository extends IForumRepository {
@@ -30,17 +29,6 @@ class ForumRepository extends IForumRepository {
       'user_key': FirebaseAuth.instance.currentUser!.uid,
       'created_at': DateTime.now().millisecondsSinceEpoch,
       'views': 0
-    });
-  }
-
-  @override
-  Future<Forum> getQuestionByKey(String key) {
-    return FirebaseFirestore.instance
-        .collection("forum")
-        .doc(key)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) async {
-      return Forum.fromMap(documentSnapshot.data() as dynamic);
     });
   }
 

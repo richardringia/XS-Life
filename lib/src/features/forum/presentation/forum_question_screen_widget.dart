@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:xs_life/src/common_widgets/loading_screen_widget.dart';
-import 'package:xs_life/src/constants/entities/Forum.dart';
 import 'package:xs_life/src/features/authentication/data/auth_service.dart';
 import 'package:xs_life/src/features/forum/data/forum_repository.dart';
 import 'package:xs_life/src/features/forum/domain/forum_question.dart';
