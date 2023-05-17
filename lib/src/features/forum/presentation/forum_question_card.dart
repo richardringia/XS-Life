@@ -51,6 +51,7 @@ class ForumQuestionCard extends StatelessWidget {
                     IconButton(
                       icon: const Icon(Icons.comment_outlined),
                       onPressed: () {
+                        forumRepository.addViewToQuestion(forumQuestion.key);
                         context.push(
                             '/${PageConstants.forum}/edit/${forumQuestion.key}');
                       },

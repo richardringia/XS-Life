@@ -6,6 +6,7 @@ class ForumQuestion {
   final String category;
   final String question;
   final List<dynamic> votes;
+  final int views;
   final UserDetail? userDetail;
 
   ForumQuestion({
@@ -13,6 +14,7 @@ class ForumQuestion {
     required this.category,
     required this.question,
     required this.votes,
+    required this.views,
     this.userDetail,
   });
 

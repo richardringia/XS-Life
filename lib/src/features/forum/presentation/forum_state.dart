@@ -44,6 +44,9 @@ class ForumState extends ChangeNotifier {
                 votes: document.data()['votes'] != null
                     ? document.data()['votes'] as List<dynamic>
                     : [],
+                views: document.data()['views'] != null
+                    ? document.data()['views'] as int
+                    : 0,
                 userDetail: userDetail),
           );
         }

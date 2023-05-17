@@ -24,33 +24,10 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
   final _formKey = GlobalKey<FormState>();
   final _comment = TextEditingController();
   ForumRepository forumRepository = ForumRepository();
-  late String key;
-  Forum forum = Forum(
-    views: 0,
-    category: "",
-    question: "",
-    topic: "",
-    user_key: "",
-    created_at: 0,
-  );
 
-  //todo: fix
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   WidgetsBinding.instance.addPostFrameCallback((_) async {
-  //     setState(() async {
-  //       await forumRepository.addViewToQuestion(key);
-  //       forum = await forumRepository.getQuestionByKey(key);
-  //     });
-  //   });
-  // }
-
-  // FirebaseFirestore.instance.collection(CollectionConstants.forumComment)
   @override
   Widget build(BuildContext context) {
-    final router = GoRouter.of(context);
-    key = router.location.split("/").toList().last;
+    List<ForumQuestionComment> comments = widget.forumQuestionComments ?? [];
 
     var details = Padding(
       padding: const EdgeInsets.all(8.0),
@@ -92,12 +69,12 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
               Padding(
                 padding: const EdgeInsets.all(3.0),
                 child: Column(
-                  children: const [
+                  children: [
                     Icon(
                       Icons.favorite,
                       color: Colors.pink,
                     ),
-                    Text("999 likes")
+                    Text("${widget.forumQuestion?.getTotalLikes()} likes")
                   ],
                 ),
               ),
@@ -113,7 +90,7 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
                 ),
               ),
               Column(
-                children: const [
+                children: [
                   Padding(
                     padding: EdgeInsets.fromLTRB(5, 3, 3, 2),
                     child: Icon(
@@ -121,7 +98,7 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
                       color: Color.fromARGB(255, 244, 156, 5),
                     ),
                   ),
-                  Text("350 comments")
+                  Text("${comments.length} comments")
                 ],
               ),
               // ignore: prefer_const_constructors
@@ -144,13 +121,12 @@ class ForumQuestionScreenWidgetState extends State<ForumQuestionScreenWidget> {
                       color: Color.fromARGB(255, 30, 164, 110),
                     ),
                   ),
-                  Text("${forum.views} views")
+                  Text("${widget.forumQuestion?.views} views")
                 ],
               )
             ],
           ),
         ));
-    List<ForumQuestionComment> comments = widget.forumQuestionComments ?? [];
     return Scaffold(
       appBar: AppBar(
         actions: [
