@@ -24,31 +24,29 @@ class _MapFilterDialogState extends State<MapFilterDialog> {
       }
     }
 
-    var listview = ListView(shrinkWrap: true, children: [
-      ListView.builder(
-        shrinkWrap: true,
-        itemCount: widget.mapCategories.length,
-        itemBuilder: (_, index) {
-          return CheckboxListTile(
-            title: Text(widget.mapCategories[index].title),
-            value: widget.selected.contains(widget.mapCategories[index]),
-            onChanged: (val) {
-              var element = widget.mapCategories[index];
-              if (widget.selected.contains(element)) {
-                widget.selected.remove(element);
-              } else {
-                widget.selected.add(element);
-              }
-              setState(() {});
-            },
-          );
-        },
-      ),
-    ]);
+    var listview = ListView.builder(
+      shrinkWrap: true,
+      itemCount: widget.mapCategories.length,
+      itemBuilder: (_, index) {
+        return CheckboxListTile(
+          title: Text(widget.mapCategories[index].title),
+          value: widget.selected.contains(widget.mapCategories[index]),
+          onChanged: (val) {
+            var element = widget.mapCategories[index];
+            if (widget.selected.contains(element)) {
+              widget.selected.remove(element);
+            } else {
+              widget.selected.add(element);
+            }
+            setState(() {});
+          },
+        );
+      },
+    );
 
     return AlertDialog(
       title: const Text("Filter"),
-      content: Container(
+      content: SizedBox(
         width: double.maxFinite,
         child: Column(
           mainAxisSize: MainAxisSize.min,
