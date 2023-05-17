@@ -65,6 +65,7 @@ class ExampleMapWidget extends StatelessWidget {
                   ),
                 ),
               ),
+              //
               Align(
                 alignment: Alignment.topCenter,
                 child: Container(

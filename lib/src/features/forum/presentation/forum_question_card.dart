@@ -14,6 +14,7 @@ class ForumQuestionCard extends StatelessWidget {
     ForumRepository forumRepository = ForumRepository();
 
     return Card(
+      shadowColor: Color.fromARGB(255, 86, 86, 86),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
