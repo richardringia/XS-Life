@@ -39,12 +39,12 @@ class _ProfileEditScreenWidgetState extends State<ProfileEditScreenWidget> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 147, 64),
       body: Padding(
-        padding: const EdgeInsets.all(40.0),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
+        padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+        child: Align(
+          alignment: Alignment.center,
           child: Container(
-            width: 500,
-            height: 700,
+            width: MediaQuery.of(context).size.width * .85,
+            padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
             decoration: BoxDecoration(
               color: const Color.fromARGB(195, 255, 255, 255),
               borderRadius: BorderRadius.circular(15),
@@ -57,155 +57,161 @@ class _ProfileEditScreenWidgetState extends State<ProfileEditScreenWidget> {
                 ),
               ],
             ),
-            child: Column(
-              children: [
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
-                      child: Image.asset(
-                        'assets/images/Artboard_11.png',
-                        width: 300,
-                        height: 300,
-                      ),
-                    ),
-                    Positioned(
-                      top: 15,
-                      left: 1,
-                      child: GestureDetector(
-                        onTap: () {
-                          // Handle icon tap action
-                          // For example, navigate back to the previous screen
-                          Navigator.pop(context);
-                        },
-                        child: const Icon(
-                          Icons.arrow_back_ios_new,
-                          color: Colors.black,
-                          size: 30,
+            child: Expanded(
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: Image.asset(
+                          'assets/images/Artboard_11.png',
+                          width: 300,
+                          height: 300,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                const Text(
-                  "Edit your profile",
-                  style: TextStyle(
-                    fontSize: 28.0,
-                    fontWeight: FontWeight.bold,
+                      Positioned(
+                        top: 0,
+                        left: 15,
+                        child: GestureDetector(
+                          onTap: () {
+                            // Handle icon tap action
+                            // For example, navigate back to the previous screen
+                            Navigator.pop(context);
+                          },
+                          child: const Icon(
+                            Icons.arrow_back_ios_new,
+                            color: Colors.black,
+                            size: 30,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        // Start from here
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                color: Colors.grey,
-                                width: 1.0,
+                  const Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Edit your profile",
+                      style: TextStyle(
+                        fontSize: 28.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          // Start from here
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: Colors.grey,
+                                  width: 1.0,
+                                ),
                               ),
-                            ),
-                            child: TextFormField(
-                              controller: _firstName,
-                              decoration: const InputDecoration(
-                                contentPadding: EdgeInsets.all(15),
-                                hintText: 'Enter your first name',
-                                border: InputBorder.none,
+                              child: TextFormField(
+                                controller: _firstName,
+                                decoration: const InputDecoration(
+                                  contentPadding: EdgeInsets.all(15),
+                                  hintText: 'Enter your first name',
+                                  border: InputBorder.none,
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your first name';
+                                  }
+                                  return null;
+                                },
                               ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your first name';
-                                }
-                                return null;
-                              },
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                color: Colors.grey,
-                                width: 1.0,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: Colors.grey,
+                                  width: 1.0,
+                                ),
                               ),
-                            ),
-                            child: TextFormField(
-                              controller: _lastName,
-                              decoration: const InputDecoration(
-                                contentPadding: EdgeInsets.all(15),
-                                hintText: 'Enter your last name',
-                                border: InputBorder.none,
+                              child: TextFormField(
+                                controller: _lastName,
+                                decoration: const InputDecoration(
+                                  contentPadding: EdgeInsets.all(15),
+                                  hintText: 'Enter your last name',
+                                  border: InputBorder.none,
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your last name';
+                                  }
+                                  return null;
+                                },
                               ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your last name';
-                                }
-                                return null;
-                              },
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 20.0),
-                        Center(
-                          child: Column(
-                            children: [
-                              Container(
-                                width: 300,
-                                child: FilledButton(
-                                  onPressed: () {
-                                    if (_formKey.currentState!.validate()) {
-                                      UserRepository userRepo =
-                                          UserRepository();
-                                      UserDetail? userDetail =
-                                          widget.userDetail;
-                                      if (userDetail != null) {
-                                        userDetail.firstname = _firstName.text;
-                                        userDetail.lastname = _lastName.text;
-                                        userRepo.updateUser(userDetail);
-                                      } else {
-                                        userRepo.checkLoggedInUser(
-                                            _firstName.text, _lastName.text);
-                                      }
+                          const SizedBox(height: 20.0),
+                          Center(
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: 300,
+                                  child: FilledButton(
+                                    onPressed: () {
+                                      if (_formKey.currentState!.validate()) {
+                                        UserRepository userRepo =
+                                            UserRepository();
+                                        UserDetail? userDetail =
+                                            widget.userDetail;
+                                        if (userDetail != null) {
+                                          userDetail.firstname = _firstName.text;
+                                          userDetail.lastname = _lastName.text;
+                                          userRepo.updateUser(userDetail);
+                                        } else {
+                                          userRepo.checkLoggedInUser(
+                                              _firstName.text, _lastName.text);
+                                        }
 
-                                      const snackBar = SnackBar(
-                                        content: Text('User details saved'),
-                                      );
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(snackBar);
-                                    }
-                                  },
-                                  child: const Text('Save'),
-                                ),
-                              ),
-                              Container(
-                                width: 300,
-                                child: FilledButton(
-                                  onPressed: () async {
-                                    FirebaseAuth.instance.signOut().then(
-                                          (value) => Navigator.pop(context),
+                                        const snackBar = SnackBar(
+                                          content: Text('User details saved'),
                                         );
-                                  },
-                                  child: const Text('Sign out'),
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(snackBar);
+                                      }
+                                    },
+                                    child: const Text('Save'),
+                                  ),
                                 ),
-                              ),
-                            ],
+                                Container(
+                                  width: 300,
+                                  child: FilledButton(
+                                    onPressed: () async {
+                                      FirebaseAuth.instance.signOut().then(
+                                            (value) => Navigator.pop(context),
+                                          );
+                                    },
+                                    child: const Text('Sign out'),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
