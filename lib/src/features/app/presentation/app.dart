@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:xs_life/src/constants/color_constants.dart';
 import 'package:xs_life/src/features/app/presentation/app_state.dart';
 import 'package:xs_life/src/features/forum/presentation/forum_state.dart';
 import 'package:xs_life/src/routing/routes.dart';
@@ -23,7 +22,7 @@ class App extends StatelessWidget {
               ),
           primarySwatch: Colors.orange,
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255),
+          scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
         ),
         routerConfig: Routes.router,
       ),

@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:xs_life/src/constants/collection_constants.dart';
-import 'package:xs_life/src/constants/entities/Forum.dart';
 import 'package:xs_life/src/features/forum/data/forum_repository_interface.dart';
 
 class ForumRepository extends IForumRepository {
@@ -31,35 +30,6 @@ class ForumRepository extends IForumRepository {
       'created_at': DateTime.now().millisecondsSinceEpoch,
       'views': 0
     });
-  }
-
-  @override
-  Future<Forum> getQuestionByKey(String key) {
-    return FirebaseFirestore.instance
-        .collection("forum")
-        .doc(key)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) async {
-      if (documentSnapshot.exists) {
-        print('Document exists on the database');
-      } else {
-        print('Document does not exist on the database');
-      }
-
-      print(documentSnapshot.data());
-
-      return Forum.fromMap(documentSnapshot.data() as dynamic);
-    });
-    // .then(
-    //       (value) => Forum(
-    //         views: value.get('views'),
-    //         category: value.get('category'),
-    //         question: value.get('question'),
-    //         topic: value.get('topic'),
-    //         user_key: value.get('user_key'),
-    //         created_at: value.get('created_at'),
-    //       ),
-    //     );
   }
 
   @override

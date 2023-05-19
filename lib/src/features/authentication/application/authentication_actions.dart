@@ -1,6 +1,7 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:xs_life/src/constants/page_constants.dart';
 import 'package:xs_life/src/features/authentication/data/user_repository.dart';
 
 class AuthenticationActions {
@@ -32,21 +33,20 @@ class AuthenticationActions {
           user.updateDisplayName(user.email!.split('@')[0]);
         }
 
-        // step 3: check if the data model is created in the collection
-        userRepo.checkLoggedInUser(user);
-
-        if (!user.emailVerified) {
-          user.sendEmailVerification();
-          const snackBar = SnackBar(
-              content: Text(
-                  'Please check your email to verify your email address'));
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        }
-        if (context.canPop()) {
-          context.pop();
-        } else {
-          context.pushReplacement('/');
-        }
+        // step 3: check if firstname and lastname are not null
+        userRepo.isUserEmpty(user).then((value) => {
+              if (value)
+                {
+                  context.replace("/${PageConstants.profile}")
+                }
+              else
+                {
+                  if (context.canPop())
+                    {context.pop()}
+                  else
+                    {context.pushReplacement('/')}
+                }
+            });
       }
     }),
   );
